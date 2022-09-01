@@ -11,7 +11,8 @@ router.get('/', async (req, res, next) => {
       attributes: ['id', 'username']
     })
     res.json(users)
-  } catch (err) {
+  } 
+  catch (err) {
     next(err)
   }
 })
