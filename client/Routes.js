@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
-import {me} from './store'
+import Shop from './components/Shop';
+import {fetchBrands, me} from './store'
 
 /**
  * COMPONENT
@@ -15,12 +16,12 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-
     return (
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
+            <Route path="/home" component={ Home } />
+            <Route path="/shop" component={ Shop } />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -49,7 +50,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
-      dispatch(me())
+      dispatch(me()),
+      dispatch(fetchBrands())
     }
   }
 }
