@@ -16,6 +16,7 @@ const Family = require('./models/Family')
 Closet.belongsTo(User);
 Closet.hasMany(Product);
 Brand.hasMany(Product);
+Product.belongsTo(Brand);
 Category.hasMany(Product);
 Product.belongsTo(Category)
 CatTemp.belongsTo(Category);

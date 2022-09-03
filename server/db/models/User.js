@@ -10,6 +10,7 @@ const Color = require('./Color');
 const Category = require('./Category');
 const Temperature = require('./Temperature');
 const Family = require('./Family');
+const Brand = require('./Brand');
 
 const SALT_ROUNDS = 5;
 
@@ -49,6 +50,9 @@ User.prototype.getCloset = async function() {
         include: [ 
           {
             model: Color
+          },
+          {
+            model: Brand
           },
           {
             model: Category,

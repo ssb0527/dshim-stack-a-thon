@@ -16,6 +16,7 @@ class Products extends Component {
     const colorMap = products
       .filter(product => !filter.categoryId || filter.categoryId === product.categoryId)
       .filter(product => !filter.colorId || filter.colorId === product.colorId)
+      .filter(product => !filter.brandId || filter.brandId === product.brandId)
       .filter(product => {
         const categoryArray = catTemps
           .filter(catTemp => catTemp.temperatureId === filter.temperatureId)
@@ -34,6 +35,7 @@ class Products extends Component {
     const categoryMap = products
       .filter(product => !filter.colorId || filter.colorId === product.colorId)
       .filter(product => !filter.categoryId || filter.categoryId === product.categoryId)
+      .filter(product => !filter.brandId || filter.brandId === product.brandId)
       .filter(product => {
         const categoryArray = catTemps
           .filter(catTemp => catTemp.temperatureId === filter.temperatureId)
@@ -67,10 +69,30 @@ class Products extends Component {
     }, {})
     const temperatureEntries = Object.values(temperatureMap)
 
+    // Brand Map
+    const brandMap = products
+    .filter(product => !filter.categoryId || filter.categoryId === product.categoryId)
+    .filter(product => !filter.colorId || filter.colorId === product.colorId)
+    .filter(product => !filter.brandId || filter.brandId === product.brandId)
+    .filter(product => {
+      const categoryArray = catTemps
+        .filter(catTemp => catTemp.temperatureId === filter.temperatureId)
+        .reduce((acc, catTemp) => [...acc, catTemp.categoryId], [])
+      return !filter.temperatureId || categoryArray.includes(product.categoryId)
+    })
+    .reduce((acc, product) => {
+      const id = product.brandId;
+      acc[id] = acc[id] || { id, count: 0, name: product.brand.name };
+      acc[id].count++;
+      return acc;
+    }, {})
+    const brandEntries = Object.values(brandMap)
+
     // Filtered Products
     const filtered = products
       .filter(product => !filter.colorId || filter.colorId === product.colorId)
       .filter(product => !filter.categoryId || filter.categoryId === product.categoryId)
+      .filter(product => !filter.brandId || filter.brandId === product.brandId)
       .filter(product => {
         const categoryArray = catTemps
           .filter(catTemp => catTemp.temperatureId === filter.temperatureId)
@@ -146,6 +168,25 @@ class Products extends Component {
                 })
               }
             </ul>
+            <h4>Brand</h4>
+            <ul>
+              {
+                brandEntries.map(entry => {
+                  const _filter = { ...filter, brandId: entry.id };
+                  if(_filter.brandId === filter.brandId) {
+                    delete _filter.brandId;
+                  }
+                  const url = `/mycloset/${JSON.stringify(_filter)}`
+                  return (
+                    <li key={ entry.id } className={ filter.brandId === entry.id ? 'selected' : ''}>
+                      <Link to={ url }>
+                        { entry.name } ({ entry.count })
+                      </Link>
+                    </li>
+                  )
+                })
+              }
+            </ul>
         </div>
         {/* Closet */}
         <div id='closet'>
@@ -162,7 +203,7 @@ class Products extends Component {
                         familyProducts.map(product => {
                           return (
                             <li key={ product.id }>
-                              <img src={ `data:image/png;base64,${ product.image }` } alt={ product.name } style={{ height: 200 }} />
+                              <img src={ `data:image/png;base64,${ product.image }` } alt={ product.name } style={{ height: 150 }} />
                             </li>
                           )
                         })
@@ -172,16 +213,6 @@ class Products extends Component {
                 )
               })
             }
-            {/* {
-              filtered.map(product => {
-                const { id, image, name } = product
-                return (
-                  <li key={ id }>
-                    <img src={ `data:image/png;base64,${ image }` } alt={ name } style={{ height: 200 }} />
-                  </li>
-                )
-              })
-            } */}
           </ul>
         </div>
       </div>
