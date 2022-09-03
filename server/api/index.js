@@ -9,6 +9,7 @@ router.use('/colors', require('./colors'));
 router.use('/products', require('./products'));
 router.use('/catTemps', require('./catTemps'));
 router.use('/closets', require('./closets'));
+router.use('/families', require('./families'));
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')

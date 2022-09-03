@@ -78,6 +78,13 @@ class Products extends Component {
         return !filter.temperatureId || categoryArray.includes(product.categoryId)
       })
 
+    const familyMap = filtered.reduce((acc, product) => {
+      const id = product.category.familyId;
+      acc[id] = acc[id] || { id, name: product.category.family.name };
+      return acc;
+    }, {})
+    const familyEntries = Object.values(familyMap)
+
     return (
       <div id='myCloset'>
         {/* Facet Search */}
@@ -142,9 +149,30 @@ class Products extends Component {
         </div>
         {/* Closet */}
         <div id='closet'>
-          <h3>My Closet</h3>
-          <ul id='closetList'>
+          <h2>My Closet</h2>
+          <ul>
             {
+              familyEntries.map(family => {
+                const familyProducts = filtered.filter(product => product.category.familyId === family.id);
+                return (
+                  <li key={ family.id }>
+                    <h3>{ family.name }</h3>
+                    <ul id='closetList'>
+                      {
+                        familyProducts.map(product => {
+                          return (
+                            <li key={ product.id }>
+                              <img src={ `data:image/png;base64,${ product.image }` } alt={ product.name } style={{ height: 200 }} />
+                            </li>
+                          )
+                        })
+                      }
+                    </ul>
+                  </li>
+                )
+              })
+            }
+            {/* {
               filtered.map(product => {
                 const { id, image, name } = product
                 return (
@@ -153,7 +181,7 @@ class Products extends Component {
                   </li>
                 )
               })
-            }
+            } */}
           </ul>
         </div>
       </div>

@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: { User, Product, Category, Color, Temperature, Brand, CatTemp, Closet } } = require('../server/db');
+const {db, models: { User, Product, Category, Color, Temperature, Brand, CatTemp, Closet, Family } } = require('../server/db');
 
 const readFile = path => {
   return new Promise((resolve, reject) => {
@@ -38,6 +38,20 @@ async function seed() {
     Brand.create({ name: 'Bottega Veneta', link: 'https://www.bottegaveneta.com/en-us', image: await readFile('./public/images/brands/bottega veneta logo.png') }),
   ])
 
+  // Creating Families
+  const [
+    outerwear,
+    tops,
+    bottoms,
+    shoes
+  ] = await Promise.all([
+    'Outerwear',
+    'Tops',
+    'Bottoms',
+    'Shoes'
+  ].map(name => Family.create({ name }))
+  );
+
   // Creating Categories
   const [ 
     sweatersCardigans, 
@@ -61,26 +75,26 @@ async function seed() {
     sneakers
   ] = await Promise.all(
     [
-      'Sweaters & Cardigans',
-      'Pants',
-      'T-Shirts',
-      'Shirts',
-      'Shorts',
-      'Sweatshirts & Hoodies',
-      'Jeans',
-      'Blazers',
-      'Coats',
-      'Trench Coats',
-      'Denim Jackets',
-      'Down Jackets',
-      'Shearling Jackets',
-      'Leather Jackets',
-      'Bombers',
-      'Boots',
-      'Lace-Ups',
-      'Sandals',
-      'Sneakers'
-    ].map(name => Category.create({ name }))
+      { name: 'Sweaters & Cardigans', familyId: tops.id },
+      { name: 'Pants', familyId: bottoms.id },
+      { name: 'T-Shirts', familyId: tops.id },
+      { name: 'Shirts', familyId: tops.id },
+      { name: 'Shorts', familyId: bottoms.id },
+      { name: 'Sweatshirts & Hoodies', familyId: tops.id },
+      { name: 'Jeans', familyId: bottoms.id },
+      { name: 'Blazers', familyId: outerwear.id },
+      { name: 'Coats', familyId: outerwear.id },
+      { name: 'Trench Coats', familyId: outerwear.id },
+      { name: 'Denim Jackets', familyId: outerwear.id },
+      { name: 'Down Jackets', familyId: outerwear.id },
+      { name: 'Shearling Jackets', familyId: outerwear.id },
+      { name: 'Leather Jackets', familyId: outerwear.id },
+      { name: 'Bombers', familyId: outerwear.id },
+      { name: 'Boots', familyId: shoes.id },
+      { name: 'Lace-Ups', familyId: shoes.id },
+      { name: 'Sandals', familyId: shoes.id },
+      { name: 'Sneakers', familyId: shoes.id }
+    ].map(category => Category.create(category))
   );
 
   // Creating Temperatures
