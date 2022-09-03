@@ -4,7 +4,8 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import Shop from './components/Shop';
-import {fetchBrands, me} from './store'
+import Products from './components/Closet'
+import {fetchBrands, fetchCategories, fetchCatTemps, fetchCloset, fetchColors, fetchTemperatures, me} from './store'
 
 /**
  * COMPONENT
@@ -13,7 +14,11 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
   }
-
+  componentDidUpdate(prevProps) {
+    if(!prevProps.auth.id && this.props.auth.id){
+      this.props.fetchData()
+    }
+  }
   render() {
     const {isLoggedIn} = this.props
     return (
@@ -22,6 +27,7 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={ Home } />
             <Route path="/shop" component={ Shop } />
+            <Route path='/mycloset/:filter?' component={ Products } />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -43,15 +49,24 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.id,
+    auth: state.auth
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
-      dispatch(me()),
-      dispatch(fetchBrands())
+    async loadInitialData() {
+      await dispatch(fetchCloset()),
+      dispatch(me())
+    },
+    fetchData() {
+      dispatch(fetchBrands()),
+      dispatch(fetchCloset()),
+      // dispatch(fetchColors()),
+      // dispatch(fetchCategories()),
+      dispatch(fetchTemperatures()),
+      dispatch(fetchCatTemps())
     }
   }
 }

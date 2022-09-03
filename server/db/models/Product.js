@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const { STRING } = Sequelize;
+const { STRING, TEXT } = Sequelize;
 const db = require('../db');
 
 const Product = db.define('product', {
@@ -8,7 +8,7 @@ const Product = db.define('product', {
     allowNull: false
    },
    image: {
-    type: STRING
+    type: TEXT
    }
 });
 

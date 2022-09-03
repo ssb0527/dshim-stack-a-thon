@@ -1,6 +1,19 @@
 'use strict'
 
-const {db, models: { User, Product, Category, Color, Temperature, Brand, CatTemp } } = require('../server/db');
+const {db, models: { User, Product, Category, Color, Temperature, Brand, CatTemp, Closet } } = require('../server/db');
+
+const readFile = path => {
+  return new Promise((resolve, reject) => {
+    require('fs').readFile(path, 'base64', (err, res) => {
+      if(err){
+        reject(err);
+      }
+      else {
+        resolve(res);
+      }
+    })
+  });
+}
 
 /**
  * seed - this function clears the database, updates tables to
@@ -18,9 +31,11 @@ async function seed() {
   ])
 
   // Creating Brands
-  const [ nike, acneStudios ] = await Promise.all([
-    Brand.create({ name: 'Nike', link: 'https://www.nike.com/', image: 'https://i.pinimg.com/originals/33/e6/3d/33e63d5adb0da6b303a83901c8e8463a.png' }),
-    Brand.create({ name: 'Acne Studios', link: 'https://www.acnestudios.com/us/en/home', image: 'https://images.squarespace-cdn.com/content/v1/5b2d151112b13ff22782e9c7/1567186641355-5Z9P6B71STSZ6P2FPELJ/AcneStudios_Logo.png?format=1500w' })
+  const [ nike, acneStudios, cos, bottegaVeneta ] = await Promise.all([
+    Brand.create({ name: 'Nike', link: 'https://www.nike.com/', image: await readFile('./public/images/brands/nike logo.png') }),
+    Brand.create({ name: 'Acne Studios', link: 'https://www.acnestudios.com/us/en/home', image: await readFile('./public/images/brands/acne studios logo.png') }),
+    Brand.create({ name: 'COS', link: 'https://www.cos.com/en_usd/index.html', image: await readFile('./public/images/brands/cos logo.png') }),
+    Brand.create({ name: 'Bottega Veneta', link: 'https://www.bottegaveneta.com/en-us', image: await readFile('./public/images/brands/bottega veneta logo.png') }),
   ])
 
   // Creating Categories
@@ -193,10 +208,17 @@ async function seed() {
     ].map(name => Color.create({ name }))
   );
 
-    // Creating Products
-    const products = await Promise.all([
-      Product.create({ name: 'Shearling Jacket', image: null, userId: david.id, brandId: acneStudios.id, categoryId: shearlingJackets.id, colorId: black.id })
-    ])
+  // Creating Closets
+  const davidCloset = await Closet.create({ userId: david.id })
+
+  // Creating Products
+  const products = await Promise.all([
+    Product.create({ name: 'Acne Studios Black Leather Shearling Jacket', image: await readFile('./public/images/products/acne studios shearling jacket.png'), closetId: davidCloset.id, brandId: acneStudios.id, categoryId: shearlingJackets.id, colorId: black.id }),
+    Product.create({ name: 'COS Black Sweater', image: await readFile('./public/images/products/cos black sweater.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: sweatersCardigans.id, colorId: black.id }),
+    Product.create({ name: 'COS Black Jeans', image: await readFile('./public/images/products/cos black jeans.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: jeans.id, colorId: black.id }),
+    Product.create({ name: 'Bottega Veneta Black Lug Chelsea Boots', image: await readFile('./public/images/products/bottega veneta lug chelsea boots.png'), closetId: davidCloset.id, brandId: bottegaVeneta.id, categoryId: boots.id, colorId: black.id }),
+    Product.create({ name: 'Bottega Veneta Beige Trench Coat', image: await readFile('./public/images/products/bottega veneta beige trench coat.png'), closetId: davidCloset.id, brandId: bottegaVeneta.id, categoryId: trenchCoats.id, colorId: beige.id })
+  ])
 
   // console.log(`seeded ${users.length} users`)
   // console.log(`seeded ${brands.length} brands`)
@@ -209,7 +231,7 @@ async function seed() {
       cody, murphy, david
     },
     brands: {
-      nike, acneStudios
+      nike, acneStudios, cos, bottegaVeneta
     },
     categories: { 
       sweatersCardigans, pants, tShirts, shirts, shorts, sweatshirtsHoodies, jeans, blazers, coats, trenchCoats, denimJackets, downJackets, shearlingJackets, leatherJackets, bombers, boots, laceUps, sandals, sneakers

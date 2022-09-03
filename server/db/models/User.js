@@ -1,9 +1,14 @@
 const Sequelize = require('sequelize')
-const { STRING, TEXT } = Sequelize;
+const { STRING } = Sequelize;
 const db = require('../db')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const axios = require('axios');
+const Closet = require('./Closet');
+const Product = require('./Product');
+const Color = require('./Color');
+const Category = require('./Category');
+const Temperature = require('./Temperature');
 
 const SALT_ROUNDS = 5;
 
@@ -30,6 +35,27 @@ User.prototype.correctPassword = function(candidatePwd) {
 
 User.prototype.generateToken = function() {
   return jwt.sign({id: this.id}, process.env.JWT)
+}
+
+User.prototype.getCloset = async function() {
+  let closet = await Closet.findOne({
+    where: {
+      userId: this.id
+    },
+    include: [
+      {
+        model: Product,
+        include: [ Color, Category ]
+      }
+    ]
+  })
+  if(!closet) {
+    closet = await Closet.create({ userId: this.id })
+    closet = await Closet.findByPk(closet.id, {
+      include: [ Product ]
+    })
+  }
+  return closet;
 }
 
 /**
