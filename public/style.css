@@ -20,6 +20,19 @@ form div {
   display: inline-block;
 }
 
+/* my styling */
+ul {
+  list-style-type: none;
+}
+
 li.selected {
   font-weight: bold;
+}
+
+#myCloset {
+  display: flex;
+}
+
+#closetList {
+  display: flex
 }

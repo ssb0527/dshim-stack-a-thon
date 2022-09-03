@@ -79,7 +79,7 @@ class Products extends Component {
       })
 
     return (
-      <div>
+      <div id='myCloset'>
         {/* Facet Search */}
         <div id='search'>
             <h4>Color</h4>
@@ -141,19 +141,21 @@ class Products extends Component {
             </ul>
         </div>
         {/* Closet */}
-        <h3>My Closet</h3>
-        <ul style={{ display: 'flex' }}>
-          {
-            filtered.map(product => {
-              const { id, image, name } = product
-              return (
-                <li key={ id }>
-                  <img src={ `data:image/png;base64,${ image }` } alt={ name } style={{ height: 200 }} />
-                </li>
-              )
-            })
-          }
-        </ul>
+        <div id='closet'>
+          <h3>My Closet</h3>
+          <ul id='closetList'>
+            {
+              filtered.map(product => {
+                const { id, image, name } = product
+                return (
+                  <li key={ id }>
+                    <img src={ `data:image/png;base64,${ image }` } alt={ name } style={{ height: 200 }} />
+                  </li>
+                )
+              })
+            }
+          </ul>
+        </div>
       </div>
     )
   }
