@@ -110,15 +110,15 @@ async function seed() {
     fourtyOrLower
   ] = await Promise.all(
     [
-      '82°F or higher',
-      '73-81°F',
-      '68-72°F',
-      '63-67°F',
-      '54-62°F',
-      '48-53°F',
-      '41-47°F',
-      '40°F or lower'
-    ].map(range => Temperature.create({ range }))
+      { range: '82°F or higher', id: 1 },
+      { range: '73-81°F', id: 2 },
+      { range: '68-72°F', id: 3 },
+      { range: '63-67°F', id: 4 },
+      { range: '54-62°F', id: 5 },
+      { range: '48-53°F', id: 6 },
+      { range: '41-47°F', id: 7 },
+      { range: '40°F or lower', id: 8 }
+    ].map(temperature => Temperature.create(temperature))
   );
 
   await Promise.all([

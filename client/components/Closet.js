@@ -111,19 +111,19 @@ class Products extends Component {
       <div id='myCloset'>
         {/* Facet Search */}
         <div id='search'>
-            <h4>Color</h4>
+            <h4>Temperature</h4>
             <ul>
               {
-                colorEntries.map(entry => {
-                  const _filter = { ...filter, colorId: entry.id };
-                  if(_filter.colorId === filter.colorId) {
-                    delete _filter.colorId;
+                temperatureEntries.map(entry => {
+                  const _filter = { ...filter, temperatureId: entry.id };
+                  if (_filter.temperatureId === filter.temperatureId) {
+                    delete _filter.temperatureId;
                   }
                   const url = `/mycloset/${JSON.stringify(_filter)}`
                   return (
-                    <li key={ entry.id } className={ filter.colorId === entry.id ? 'selected' : ''}>
+                    <li key={ entry.id } className={ filter.temperatureId === entry.id ? 'selected' : ''}>
                       <Link to={ url }>
-                        { entry.name } ({ entry.count })
+                        { entry.range } ({ entry.count })
                       </Link>
                     </li>
                   )
@@ -149,19 +149,19 @@ class Products extends Component {
                 })
               }
             </ul>
-            <h4>Temperature</h4>
+            <h4>Color</h4>
             <ul>
               {
-                temperatureEntries.map(entry => {
-                  const _filter = { ...filter, temperatureId: entry.id };
-                  if (_filter.temperatureId === filter.temperatureId) {
-                    delete _filter.temperatureId;
+                colorEntries.map(entry => {
+                  const _filter = { ...filter, colorId: entry.id };
+                  if(_filter.colorId === filter.colorId) {
+                    delete _filter.colorId;
                   }
                   const url = `/mycloset/${JSON.stringify(_filter)}`
                   return (
-                    <li key={ entry.id } className={ filter.temperatureId === entry.id ? 'selected' : ''}>
+                    <li key={ entry.id } className={ filter.colorId === entry.id ? 'selected' : ''}>
                       <Link to={ url }>
-                        { entry.range } ({ entry.count })
+                        { entry.name } ({ entry.count })
                       </Link>
                     </li>
                   )
