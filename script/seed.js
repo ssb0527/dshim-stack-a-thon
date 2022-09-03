@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: { User, Product, Category, Color, Temperature, Brand, CatTemp, Closet, Family } } = require('../server/db');
+const {db, models: { User, Product, Category, Color, Temperature, Brand, CatTemp, Closet, Family, Look } } = require('../server/db');
 
 const readFile = path => {
   return new Promise((resolve, reject) => {
@@ -31,11 +31,12 @@ async function seed() {
   ])
 
   // Creating Brands
-  const [ nike, acneStudios, cos, bottegaVeneta ] = await Promise.all([
+  const [ nike, acneStudios, cos, bottegaVeneta, alexanderWang ] = await Promise.all([
     Brand.create({ name: 'Nike', link: 'https://www.nike.com/', image: await readFile('./public/images/brands/nike logo.png') }),
     Brand.create({ name: 'Acne Studios', link: 'https://www.acnestudios.com/us/en/home', image: await readFile('./public/images/brands/acne studios logo.png') }),
     Brand.create({ name: 'COS', link: 'https://www.cos.com/en_usd/index.html', image: await readFile('./public/images/brands/cos logo.png') }),
     Brand.create({ name: 'Bottega Veneta', link: 'https://www.bottegaveneta.com/en-us', image: await readFile('./public/images/brands/bottega veneta logo.png') }),
+    Brand.create({ name: 'Alexander Wang', link: 'https://www.alexanderwang.com/us-en/', image: await readFile('./public/images/brands/alexander wang logo.png') })
   ])
 
   // Creating Families
@@ -231,8 +232,35 @@ async function seed() {
     Product.create({ name: 'COS Black Sweater', image: await readFile('./public/images/products/cos black sweater.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: sweatersCardigans.id, colorId: black.id }),
     Product.create({ name: 'COS Black Jeans', image: await readFile('./public/images/products/cos black jeans.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: jeans.id, colorId: black.id }),
     Product.create({ name: 'Bottega Veneta Black Lug Chelsea Boots', image: await readFile('./public/images/products/bottega veneta lug chelsea boots.png'), closetId: davidCloset.id, brandId: bottegaVeneta.id, categoryId: boots.id, colorId: black.id }),
-    Product.create({ name: 'Bottega Veneta Beige Trench Coat', image: await readFile('./public/images/products/bottega veneta beige trench coat.png'), closetId: davidCloset.id, brandId: bottegaVeneta.id, categoryId: trenchCoats.id, colorId: beige.id })
+    Product.create({ name: 'Bottega Veneta Beige Trench Coat', image: await readFile('./public/images/products/bottega veneta beige trench coat.png'), closetId: davidCloset.id, brandId: bottegaVeneta.id, categoryId: trenchCoats.id, colorId: beige.id }),
+    Product.create({ name: 'Alexander Wang Grey Hoodie', image: await readFile('./public/images/products/alexander wang grey hoodie.png'), closetId: davidCloset.id, brandId: alexanderWang.id, categoryId: sweatshirtsHoodies.id, colorId: grey.id }),
+    Product.create({ name: 'COS Light Blue Jeans', image: await readFile('./public/images/products/cos light blue jeans.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: jeans.id, colorId: blue.id }),
+    Product.create({ name: 'Nike Stussy Air Force Sneakers', image: await readFile('./public/images/products/nike stussy air force.png'), closetId: davidCloset.id, brandId: nike.id, categoryId: sneakers.id, colorId: white.id })
   ])
+
+  // Creating Looks
+  await Promise.all([
+    Look.create({ 
+      outerwearImage: await readFile('./public/images/products/acne studios shearling jacket.png'), 
+      topImage: await readFile('./public/images/products/cos black sweater.png'), 
+      bottomImage: await readFile('./public/images/products/cos black jeans.png'), 
+      shoeImage: await readFile('./public/images/products/bottega veneta lug chelsea boots.png'),
+      date: '2022-01-15',
+      temperature: '40°F or lower',
+      note: 'Snowy day',
+      userId: david.id
+    }),
+    Look.create({ 
+      outerwearImage: await readFile('./public/images/products/bottega veneta beige trench coat.png'), 
+      topImage: await readFile('./public/images/products/alexander wang grey hoodie.png'), 
+      bottomImage: await readFile('./public/images/products/cos light blue jeans.png'), 
+      shoeImage: await readFile('./public/images/products/nike stussy air force.png'),
+      date: '2022-04-07',
+      temperature: '48-53°F',
+      note: 'Shopping in soho', 
+      userId: david.id
+    })
+  ])  
 
   // console.log(`seeded ${users.length} users`)
   // console.log(`seeded ${brands.length} brands`)

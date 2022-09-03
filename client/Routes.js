@@ -5,7 +5,8 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import Shop from './components/Shop';
 import Products from './components/Closet'
-import {fetchBrands, fetchCatTemps, fetchCloset, fetchTemperatures, me} from './store'
+import {fetchBrands, fetchCatTemps, fetchCloset, fetchLooks, me} from './store'
+import Looks from './components/Looks';
 
 /**
  * COMPONENT
@@ -27,7 +28,8 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={ Home } />
             <Route path="/shop" component={ Shop } />
-            <Route path='/mycloset/:filter?' component={ Products } />
+            <Route path="/mycloset/:filter?" component={ Products } />
+            <Route path="/looks" component={ Looks } />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -63,8 +65,8 @@ const mapDispatch = dispatch => {
     fetchData() {
       dispatch(fetchBrands()),
       dispatch(fetchCloset()),
-      dispatch(fetchTemperatures()),
-      dispatch(fetchCatTemps())
+      dispatch(fetchCatTemps()),
+      dispatch(fetchLooks())
     }
   }
 }

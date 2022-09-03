@@ -36,3 +36,7 @@ li.selected {
 #closetList {
   display: flex
 }
+
+li {
+  margin-right: 50px;
+}

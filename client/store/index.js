@@ -4,15 +4,15 @@ import thunkMiddleware from 'redux-thunk'
 import auth from './auth'
 import brands from './brands'
 import closet from './closet'
-import temperatures from './temperatures'
 import catTemps from './catTemps'
+import looks from './looks'
 
 const reducer = combineReducers({ 
     auth,
     brands,
     closet,
-    temperatures,
-    catTemps
+    catTemps,
+    looks
 })
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 const store = createStore(reducer, middleware)
@@ -21,5 +21,5 @@ export default store
 export * from './auth'
 export * from './brands'
 export * from './closet'
-export * from './temperatures'
 export * from './catTemps'
+export * from './looks'

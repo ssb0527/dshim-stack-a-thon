@@ -4,9 +4,7 @@ import {connect} from 'react-redux'
 /**
  * COMPONENT
  */
-const Shop = props => {
-  const { brands } = props;
-
+const Shop = ({ brands }) => {
   return (
     <div>
       <h3>This is Shop</h3>

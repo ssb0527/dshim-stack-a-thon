@@ -11,6 +11,7 @@ const Temperature = require('./models/Temperature')
 const CatTemp = require('./models/CatTemp')
 const Closet = require('./models/Closet')
 const Family = require('./models/Family')
+const Look = require('./models/Look')
 
 //associations could go here!
 Closet.belongsTo(User);
@@ -25,6 +26,8 @@ Color.hasMany(Product);
 Product.belongsTo(Color);
 Family.hasMany(Category);
 Category.belongsTo(Family);
+User.hasMany(Look);
+Look.belongsTo(User);
 
 module.exports = {
   db,
@@ -37,6 +40,7 @@ module.exports = {
     Temperature,
     CatTemp,
     Closet,
-    Family
+    Family,
+    Look
   }
 }

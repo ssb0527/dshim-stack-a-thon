@@ -11,6 +11,7 @@ const Category = require('./Category');
 const Temperature = require('./Temperature');
 const Family = require('./Family');
 const Brand = require('./Brand');
+const Look = require('./Look');
 
 const SALT_ROUNDS = 5;
 
@@ -69,6 +70,15 @@ User.prototype.getCloset = async function() {
     })
   }
   return closet;
+}
+
+User.prototype.getLooks = async function() {
+  let looks = await Look.findAll({
+    where: {
+      userId: this.id
+    }
+  })
+  return looks;
 }
 
 /**
