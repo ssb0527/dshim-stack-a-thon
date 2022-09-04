@@ -34,7 +34,8 @@ li.selected {
 }
 
 #closetList {
-  display: flex
+  display: flex;
+  flex-wrap: wrap;
 }
 
 li {

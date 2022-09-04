@@ -15,6 +15,15 @@ const Look = db.define('look', {
    shoeImage: {
     type: TEXT
    },
+   hatImage: {
+      type: TEXT
+   },
+   bagImage: {
+      type: TEXT
+   },
+   sockImage: {
+      type: TEXT
+   },
    date: {
     type: DATEONLY
    },

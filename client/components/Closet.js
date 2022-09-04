@@ -10,10 +10,13 @@ class Products extends Component {
   constructor() {
     super();
     this.state = {
+      Hats: '',
       Outerwear: '',
       Tops: '',
       Bottoms: '',
       Shoes: '',
+      Bags: '',
+      Socks: '',
       date: '',
       note: ''
     }
@@ -22,10 +25,13 @@ class Products extends Component {
   save(ev) {
     ev.preventDefault();
     const look = {
+      hatImage: this.state.Hats,
       outerwearImage: this.state.Outerwear,
       topImage: this.state.Tops,
       bottomImage: this.state.Bottoms,
       shoeImage: this.state.Shoes,
+      bagImage: this.state.Bags,
+      sockImage: this.state.Socks,
       date: this.state.date,
       note: this.state.note
     }
@@ -33,7 +39,7 @@ class Products extends Component {
   }
   render() {
     const { closet: { products }, catTemps, match, deleteItem } = this.props;
-    const { Outerwear, Tops, Bottoms, Shoes, date, note } = this.state;
+    const { Hats, Outerwear, Tops, Bottoms, Shoes, Bags, Socks, date, note } = this.state;
     const { save } = this;
     
     const filter = match.params.filter ? JSON.parse(match.params.filter) : {};
@@ -229,10 +235,10 @@ class Products extends Component {
                       {
                         familyProducts.map(product => {
                           return (
-                            <li key={ product.id }>
-                              <img 
+                            <li key={ product.id }><img 
                                 src={ `data:image/png;base64,${ product.image }` } 
-                                alt={ product.name } style={{ height: 150 }} 
+                                alt={ product.name } 
+                                style={ product.category.family.name === 'Hats' ? { height: 70 } : { height: 150 } } 
                                 onClick={ () => this.setState({ [ family.name ]: product.image}) }
                               />
                               <br />
@@ -253,12 +259,16 @@ class Products extends Component {
         <div>
           <h4>Outfit of the Day</h4>
           <form onSubmit={ save }>
+            <img src={ Hats && `data:image/png;base64,${ Hats }` } onClick={ () => this.setState({ Hats: '' })} style={{ height: 30 }} />
+            <br />
             <img src={ Tops && `data:image/png;base64,${ Tops }` } onClick={ () => this.setState({ Tops: '' })} style={{ height: 100 }} />
             <img src={ Outerwear && `data:image/png;base64,${ Outerwear }` } onClick={ () => this.setState({ Outerwear: '' })} style={{ height: 100 }} />
             <br />
             <img src={ Bottoms && `data:image/png;base64,${ Bottoms }` } onClick={ () => this.setState({ Bottoms: '' })} style={{ height: 100 }} />
+            <img src={ Bags && `data:image/png;base64,${ Bags }` } onClick={ () => this.setState({ Bags: '' })} style={{ height: 100 }} />
             <br />
-            <img src={ Shoes && `data:image/png;base64,${ Shoes }` } onClick={ () => this.setState({ Shoes: '' })} style={{ height: 100 }} />
+            <img src={ Shoes && `data:image/png;base64,${ Shoes }` } onClick={ () => this.setState({ Shoes: '' })} style={{ height: 50 }} />
+            <img src={ Socks && `data:image/png;base64,${ Socks }` } onClick={ () => this.setState({ Socks: '' })} style={{ height: 50 }} />
             <br/>
             <p>Date</p>
             <input type='date' value={ date } onChange={ ev => this.setState({ date: ev.target.value })} />

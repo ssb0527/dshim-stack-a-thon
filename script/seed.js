@@ -31,12 +31,13 @@ async function seed() {
   ])
 
   // Creating Brands
-  const [ nike, acneStudios, cos, bottegaVeneta, alexanderWang ] = await Promise.all([
+  const [ nike, acneStudios, cos, bottegaVeneta, alexanderWang, uniqlo ] = await Promise.all([
     Brand.create({ name: 'Nike', link: 'https://www.nike.com/', image: await readFile('./public/images/brands/nike logo.png') }),
     Brand.create({ name: 'Acne Studios', link: 'https://www.acnestudios.com/us/en/home', image: await readFile('./public/images/brands/acne studios logo.png') }),
     Brand.create({ name: 'COS', link: 'https://www.cos.com/en_usd/index.html', image: await readFile('./public/images/brands/cos logo.png') }),
     Brand.create({ name: 'Bottega Veneta', link: 'https://www.bottegaveneta.com/en-us', image: await readFile('./public/images/brands/bottega veneta logo.png') }),
-    Brand.create({ name: 'Alexander Wang', link: 'https://www.alexanderwang.com/us-en/', image: await readFile('./public/images/brands/alexander wang logo.png') })
+    Brand.create({ name: 'Alexander Wang', link: 'https://www.alexanderwang.com/us-en/', image: await readFile('./public/images/brands/alexander wang logo.png') }),
+    Brand.create({ name: 'Uniqlo', link: 'https://www.uniqlo.com/us/en/', image: await readFile('./public/images/brands/uniqlo logo.png') })
   ])
 
   // Creating Families
@@ -44,12 +45,18 @@ async function seed() {
     outerwear,
     tops,
     bottoms,
-    shoes
+    shoes,
+    hats,
+    bags,
+    socks
   ] = await Promise.all([
     'Outerwear',
     'Tops',
     'Bottoms',
-    'Shoes'
+    'Shoes',
+    'Hats',
+    'Bags',
+    'Socks'
   ].map(name => Family.create({ name }))
   );
 
@@ -73,7 +80,14 @@ async function seed() {
     boots,
     laceUps,
     sandals,
-    sneakers
+    sneakers,
+    bucketHats,
+    caps,
+    beanies,
+    backpacks,
+    messengerBags,
+    toteBags,
+    sockss
   ] = await Promise.all(
     [
       { name: 'Sweaters & Cardigans', familyId: tops.id },
@@ -94,7 +108,14 @@ async function seed() {
       { name: 'Boots', familyId: shoes.id },
       { name: 'Lace-Ups', familyId: shoes.id },
       { name: 'Sandals', familyId: shoes.id },
-      { name: 'Sneakers', familyId: shoes.id }
+      { name: 'Sneakers', familyId: shoes.id },
+      { name: 'Bucket Hats', familyId: hats.id },
+      { name: 'Caps', familyId: hats.id },
+      { name: 'Beanies', familyId: hats.id },
+      { name: 'Backpacks', familyId: bags.id },
+      { name: 'Messenger Bags', familyId: bags.id },
+      { name: 'Tote Bags', familyId: bags.id },
+      { name: 'Socks', familyId: socks.id }
     ].map(category => Category.create(category))
   );
 
@@ -235,7 +256,11 @@ async function seed() {
     Product.create({ name: 'Bottega Veneta Beige Trench Coat', image: await readFile('./public/images/products/bottega veneta beige trench coat.png'), closetId: davidCloset.id, brandId: bottegaVeneta.id, categoryId: trenchCoats.id, colorId: beige.id }),
     Product.create({ name: 'Alexander Wang Grey Hoodie', image: await readFile('./public/images/products/alexander wang grey hoodie.png'), closetId: davidCloset.id, brandId: alexanderWang.id, categoryId: sweatshirtsHoodies.id, colorId: grey.id }),
     Product.create({ name: 'COS Light Blue Jeans', image: await readFile('./public/images/products/cos light blue jeans.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: jeans.id, colorId: blue.id }),
-    Product.create({ name: 'Nike Stussy Air Force Sneakers', image: await readFile('./public/images/products/nike stussy air force.png'), closetId: davidCloset.id, brandId: nike.id, categoryId: sneakers.id, colorId: white.id })
+    Product.create({ name: 'Nike Stussy Air Force Sneakers', image: await readFile('./public/images/products/nike stussy air force.png'), closetId: davidCloset.id, brandId: nike.id, categoryId: sneakers.id, colorId: white.id }),
+    Product.create({ name: 'COS Black Bucket Hat', image: await readFile('./public/images/products/cos black bucket hat.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: bucketHats.id, colorId: black.id }),
+    Product.create({ name: 'COS Natural Large Shoulder Bag', image: await readFile('./public/images/products/cos natural large shoulder bag.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: messengerBags.id, colorId: beige.id }),
+    Product.create({ name: 'Uniqlo White Long Socks', image: await readFile('./public/images/products/uniqlo white long socks.png'), closetId: davidCloset.id, brandId: uniqlo.id, categoryId: sockss.id, colorId: white.id }),
+    Product.create({ name: 'Uniqlo Black Long Socks', image: await readFile('./public/images/products/uniqlo black long socks.png'), closetId: davidCloset.id, brandId: uniqlo.id, categoryId: sockss.id, colorId: black.id })
   ])
 
   // Creating Looks
@@ -268,23 +293,23 @@ async function seed() {
   // console.log(`seeded ${temperatures.length} temperatures`)
   // console.log(`seeded ${colors.length} colors`)
   console.log(`seeded successfully`)
-  return {
-    users: { 
-      cody, murphy, david
-    },
-    brands: {
-      nike, acneStudios, cos, bottegaVeneta
-    },
-    categories: { 
-      sweatersCardigans, pants, tShirts, shirts, shorts, sweatshirtsHoodies, jeans, blazers, coats, trenchCoats, denimJackets, downJackets, shearlingJackets, leatherJackets, bombers, boots, laceUps, sandals, sneakers
-    },
-    colors: { 
-        black, blue, brown, burgundy, grey, green, navy, orange, pink, purple, red, beige, white, yellow
-    },
-    temperatures: {
-      eightyTwoOrHigher, seventyThreeToEightyOne, sixtyEightToSeventyTwo, sixtyThreeToSixtySeven, fiftyFourToSixtyTwo, fourtyEightToFiftyThree, fourtyOneToFourtySeven, fourtyOrLower
-    }
-  }
+  // return {
+  //   users: { 
+  //     cody, murphy, david
+  //   },
+  //   brands: {
+  //     nike, acneStudios, cos, bottegaVeneta
+  //   },
+  //   categories: { 
+  //     sweatersCardigans, pants, tShirts, shirts, shorts, sweatshirtsHoodies, jeans, blazers, coats, trenchCoats, denimJackets, downJackets, shearlingJackets, leatherJackets, bombers, boots, laceUps, sandals, sneakers
+  //   },
+  //   colors: { 
+  //       black, blue, brown, burgundy, grey, green, navy, orange, pink, purple, red, beige, white, yellow
+  //   },
+  //   temperatures: {
+  //     eightyTwoOrHigher, seventyThreeToEightyOne, sixtyEightToSeventyTwo, sixtyThreeToSixtySeven, fiftyFourToSixtyTwo, fourtyEightToFiftyThree, fourtyOneToFourtySeven, fourtyOrLower
+  //   }
+  // }
 }
 
 /*

@@ -8,14 +8,14 @@ const Shop = ({ brands }) => {
   return (
     <div>
       <h3>Shop</h3>
-      <ul style={{ display: 'flex' }}>
+      <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
         {
             brands.map(brand => {
                 const { id, image, link, name } = brand
                 return (
                     <li key={ id }>
                         <a href={ link } target='_blank'>
-                            <img src={ `data:image/png;base64,${image}` } alt={ name } style={{ height: 200, width: 200 }} />
+                            <img src={ `data:image/png;base64,${image}` } alt={ name } style={{ height: 200, width: 200, borderRadius: 20 }} />
                         </a>
                     </li>
                 )
