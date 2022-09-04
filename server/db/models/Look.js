@@ -18,9 +18,6 @@ const Look = db.define('look', {
    date: {
     type: DATEONLY
    },
-   temperature: {
-    type: STRING
-   },
    note: {
     type: TEXT
    }

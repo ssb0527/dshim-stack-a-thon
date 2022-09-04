@@ -5,12 +5,14 @@ import axios from 'axios'
  */
 const SET_LOOKS = 'SET_LOOKS'
 const CREATE_LOOK = 'CREATE_LOOK'
+const DELETE_LOOK = 'DELETE_LOOK'
 
 /**
  * ACTION CREATORS
  */
 const setLooks = looks => ({type: SET_LOOKS, looks})
 const saveLook = look => ({type: CREATE_LOOK, look})
+const destroyLook = look => ({type: DELETE_LOOK, look})
 
 /**
  * THUNK CREATORS
@@ -33,6 +35,15 @@ export const createLook = (look) => async dispatch => {
   return dispatch(saveLook(res.data))
 }
 
+export const deleteLook = (look) => async dispatch => {
+  await axios.delete(`/api/looks/${ look.id }`, {
+    headers: {
+      authorization: window.localStorage.getItem('token')
+    }
+  })
+  return dispatch(destroyLook(look))
+}
+
 
 /**
  * REDUCER
@@ -43,6 +54,8 @@ export default function(state = [], action) {
       return action.looks
     case CREATE_LOOK:
       return [...state, action.look]
+    case DELETE_LOOK:
+      return state.filter(look => look.id !== action.look.id)
     default:
       return state
   }

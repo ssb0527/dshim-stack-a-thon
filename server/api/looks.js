@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const isLoggedIn = require('./middleware');
 module.exports = router
-// const { models: { Look }} = require('../db')
 
 router.get('/', isLoggedIn, async (req, res, next) => {
     try {
@@ -20,12 +19,12 @@ router.post('/', isLoggedIn, async (req, res, next) => {
     next(err)
   }
 })
-
-// router.post('/', async (req, res, next) => {
-//   try {
-//     res.status(201).send(await Look.create(req.body));
-//   } 
-//   catch (err) {
-//     next(err)
-//   }
-// })
+router.delete('/:id', isLoggedIn, async (req, res, next) => {
+  try {
+    await req.user.deleteLook(req.params.id);
+    res.sendStatus(204);
+  } 
+  catch (err) {
+    next(err)
+  }
+})

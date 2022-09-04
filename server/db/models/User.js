@@ -85,6 +85,12 @@ User.prototype.saveLook = async function(look) {
   return await Look.create({ ...look, userId: this.id });
 }
 
+User.prototype.deleteLook = async function(lookId) {
+  const look = await Look.findByPk(lookId)
+  await look.destroy();
+  return
+}
+
 /**
  * classMethods
  */

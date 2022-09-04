@@ -1,17 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import { deleteLook } from '../store';
 
 /**
  * COMPONENT
  */
-const Looks = ({ looks }) => {
+const Looks = ({ looks, deleteLook }) => {
   return (
     <div>
       <h2>Saved Looks</h2>
       <ul style={{ display: 'flex' }}>
         {
             looks.map(look => {
-                const { id, outerwearImage, topImage, bottomImage, shoeImage, date, temperature, note } = look
+                const { id, outerwearImage, topImage, bottomImage, shoeImage, date, note } = look
                 return (
                     <li key={ id }>
                         <h3>Look { id }</h3>
@@ -23,8 +24,8 @@ const Looks = ({ looks }) => {
                         <img src={ shoeImage && `data:image/png;base64,${ shoeImage }` } style={{ height: 100 }} />
                         <br />
                         <p>Date: { date }</p>
-                        <p>Temperature: { temperature }</p>
-                        <p>Note: { note }</p>
+                        <p>Note: { !note ? 'n/a' : note }</p>
+                        <button onClick={ () => deleteLook(look) }>Remove</button>
                     </li>
                 )
             })
@@ -41,4 +42,12 @@ const mapState = state => {
   return state
 }
 
-export default connect(mapState)(Looks)
+const mapDispatch = dispatch => {
+  return {
+    deleteLook(look) {
+      dispatch(deleteLook(look))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(Looks)

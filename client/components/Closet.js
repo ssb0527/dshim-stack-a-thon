@@ -15,7 +15,6 @@ class Products extends Component {
       Bottoms: '',
       Shoes: '',
       date: '',
-      temperature: '',
       note: ''
     }
     this.save = this.save.bind(this);
@@ -28,13 +27,12 @@ class Products extends Component {
       bottomImage: this.state.Bottoms,
       shoeImage: this.state.Shoes,
       date: this.state.date,
-      temperature: this.state.temperature,
       note: this.state.note
     }
     this.props.createLook(look);
   }
   render() {
-    const { closet: { products }, catTemps, temperatures, match } = this.props;
+    const { closet: { products }, catTemps, match } = this.props;
     const { Outerwear, Tops, Bottoms, Shoes, date, temperature, note } = this.state;
     const { save } = this;
     
@@ -261,21 +259,12 @@ class Products extends Component {
             Date
             <br />
             <input type='date' value={ date } onChange={ ev => this.setState({ date: ev.target.value })} />
-            <br/>
-            Temperature
             <br />
-            <select value={ temperature } onChange={ ev => this.setState({ temperature: ev.target.value })}>
-              <option value='' disabled>-- Select Temperature --</option>
-              {
-                temperatures.map( temperature => <option value={ temperature.range } key={ temperature.id }>{ temperature.range }</option>)
-              }
-            </select>
-            <br/>
             Note
             <br/>
             <textarea placeholder='Special occasion?' value={ note } onChange={ ev => this.setState({ note: ev.target.value })}/>
             <br/>
-            <button disabled={ !date || !temperature }>Save Look</button>
+            <button disabled={ !date }>Save Look</button>
           </form>
         </div>
       </div>
