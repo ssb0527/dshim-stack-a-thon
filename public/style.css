@@ -40,3 +40,7 @@ li.selected {
 li {
   margin-right: 50px;
 }
+
+p {
+  margin-bottom: 0;
+}

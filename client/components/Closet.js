@@ -217,6 +217,7 @@ class Products extends Component {
         {/* Closet */}
         <div id='closet'>
           <h2>My Closet</h2>
+          <Link to='/addNewItem'>Add New Item to My Closet</Link>
           <ul>
             {
               familyEntries.map(family => {
@@ -256,12 +257,10 @@ class Products extends Component {
             <br />
             <img src={ Shoes && `data:image/png;base64,${ Shoes }` } onClick={ () => this.setState({ Shoes: '' })} style={{ height: 100 }} />
             <br/>
-            Date
-            <br />
+            <p>Date</p>
             <input type='date' value={ date } onChange={ ev => this.setState({ date: ev.target.value })} />
             <br />
-            Note
-            <br/>
+            <p>Note</p>
             <textarea placeholder='Special occasion?' value={ note } onChange={ ev => this.setState({ note: ev.target.value })}/>
             <br/>
             <button disabled={ !date }>Save Look</button>

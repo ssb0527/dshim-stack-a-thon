@@ -91,6 +91,12 @@ User.prototype.deleteLook = async function(lookId) {
   return
 }
 
+User.prototype.addItemToCloset = async function(product) {
+  const closet = await this.getCloset();
+  await Product.create({ ...product, closetId: closet.id });
+  return this.getCloset();
+}
+
 /**
  * classMethods
  */

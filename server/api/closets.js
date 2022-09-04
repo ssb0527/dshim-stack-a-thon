@@ -10,3 +10,12 @@ router.get('/', isLoggedIn, async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/', isLoggedIn, async(req, res, next)=> {
+  try {
+    res.send(await req.user.addItemToCloset(req.body));
+  }
+  catch(ex){
+    next(ex);
+  }
+});

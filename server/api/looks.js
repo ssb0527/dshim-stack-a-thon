@@ -19,6 +19,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
     next(err)
   }
 })
+
 router.delete('/:id', isLoggedIn, async (req, res, next) => {
   try {
     await req.user.deleteLook(req.params.id);

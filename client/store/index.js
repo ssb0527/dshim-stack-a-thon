@@ -6,7 +6,8 @@ import brands from './brands'
 import closet from './closet'
 import catTemps from './catTemps'
 import looks from './looks'
-import temperatures from './temperatures'
+import categories from './categories'
+import colors from './colors'
 
 const reducer = combineReducers({ 
     auth,
@@ -14,7 +15,8 @@ const reducer = combineReducers({
     closet,
     catTemps,
     looks,
-    temperatures
+    categories,
+    colors
 })
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 const store = createStore(reducer, middleware)
@@ -25,4 +27,5 @@ export * from './brands'
 export * from './closet'
 export * from './catTemps'
 export * from './looks'
-export * from './temperatures'
+export * from './categories'
+export * from './colors'
