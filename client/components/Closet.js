@@ -1,14 +1,42 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-// import Search from './Search';
+import { createLook } from '../store';
 
 /**
  * COMPONENT
  */
 class Products extends Component {
+  constructor() {
+    super();
+    this.state = {
+      Outerwear: '',
+      Tops: '',
+      Bottoms: '',
+      Shoes: '',
+      date: '',
+      temperature: '',
+      note: ''
+    }
+    this.save = this.save.bind(this);
+  }
+  save(ev) {
+    ev.preventDefault();
+    const look = {
+      outerwearImage: this.state.Outerwear,
+      topImage: this.state.Tops,
+      bottomImage: this.state.Bottoms,
+      shoeImage: this.state.Shoes,
+      date: this.state.date,
+      temperature: this.state.temperature,
+      note: this.state.note
+    }
+    this.props.createLook(look);
+  }
   render() {
-    const { closet: { products }, catTemps, match } = this.props;
+    const { closet: { products }, catTemps, temperatures, match } = this.props;
+    const { Outerwear, Tops, Bottoms, Shoes, date, temperature, note } = this.state;
+    const { save } = this;
     
     const filter = match.params.filter ? JSON.parse(match.params.filter) : {};
 
@@ -51,7 +79,7 @@ class Products extends Component {
     const categoryEntries = Object.values(categoryMap)
 
     // Temperature Map
-    const temperatures = categoryEntries.map(entry => {
+    const temperatureList = categoryEntries.map(entry => {
       const temperatureObj = catTemps
         .filter(catTemp => catTemp.category.name === entry.name)
         .reduce((acc, catTemp) => {
@@ -61,7 +89,7 @@ class Products extends Component {
           }, {})
       return Object.values(temperatureObj)
     })
-    const temperatureMap = temperatures.flat().reduce((acc, temperature) => {
+    const temperatureMap = temperatureList.flat().reduce((acc, temperature) => {
       const id = temperature.id;
       acc[id] = acc[id] || { id, count: 0, range: temperature.range };
       acc[id].count++;
@@ -203,7 +231,11 @@ class Products extends Component {
                         familyProducts.map(product => {
                           return (
                             <li key={ product.id }>
-                              <img src={ `data:image/png;base64,${ product.image }` } alt={ product.name } style={{ height: 150 }} />
+                              <img 
+                                src={ `data:image/png;base64,${ product.image }` } 
+                                alt={ product.name } style={{ height: 150 }} 
+                                onClick={ () => this.setState({ [ family.name ]: product.image}) }
+                              />
                             </li>
                           )
                         })
@@ -214,6 +246,37 @@ class Products extends Component {
               })
             }
           </ul>
+        </div>
+        {/* OOTD */}
+        <div>
+          <h4>Outfit of the Day</h4>
+          <form onSubmit={ save }>
+            <img src={ Tops && `data:image/png;base64,${ Tops }` } onClick={ () => this.setState({ Tops: '' })} style={{ height: 100 }} />
+            <img src={ Outerwear && `data:image/png;base64,${ Outerwear }` } onClick={ () => this.setState({ Outerwear: '' })} style={{ height: 100 }} />
+            <br />
+            <img src={ Bottoms && `data:image/png;base64,${ Bottoms }` } onClick={ () => this.setState({ Bottoms: '' })} style={{ height: 100 }} />
+            <br />
+            <img src={ Shoes && `data:image/png;base64,${ Shoes }` } onClick={ () => this.setState({ Shoes: '' })} style={{ height: 100 }} />
+            <br/>
+            Date
+            <br />
+            <input type='date' value={ date } onChange={ ev => this.setState({ date: ev.target.value })} />
+            <br/>
+            Temperature
+            <br />
+            <select value={ temperature } onChange={ ev => this.setState({ temperature: ev.target.value })}>
+              <option value='' disabled>-- Select Temperature --</option>
+              {
+                temperatures.map( temperature => <option value={ temperature.range } key={ temperature.id }>{ temperature.range }</option>)
+              }
+            </select>
+            <br/>
+            Note
+            <br/>
+            <textarea placeholder='Special occasion?' value={ note } onChange={ ev => this.setState({ note: ev.target.value })}/>
+            <br/>
+            <button disabled={ !date || !temperature }>Save Look</button>
+          </form>
         </div>
       </div>
     )
@@ -231,12 +294,12 @@ const mapState = (state, otherProps) => {
   }
 }
 
-// const mapDispatch = dispatch => {
-//   return {
-//     fetchProducts() {
-//       dispatch(fetchProducts())
-//     }
-//   }
-// }
+const mapDispatch = dispatch => {
+  return {
+    createLook(look) {
+      dispatch(createLook(look))
+    }
+  }
+}
 
-export default connect(mapState)(Products)
+export default connect(mapState, mapDispatch)(Products)

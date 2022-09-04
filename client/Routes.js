@@ -5,7 +5,7 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import Shop from './components/Shop';
 import Products from './components/Closet'
-import {fetchBrands, fetchCatTemps, fetchCloset, fetchLooks, me} from './store'
+import {fetchBrands, fetchCatTemps, fetchCloset, fetchLooks, fetchTemperatures, me} from './store'
 import Looks from './components/Looks';
 
 /**
@@ -66,7 +66,8 @@ const mapDispatch = dispatch => {
       dispatch(fetchBrands()),
       dispatch(fetchCloset()),
       dispatch(fetchCatTemps()),
-      dispatch(fetchLooks())
+      dispatch(fetchLooks()),
+      dispatch(fetchTemperatures())
     }
   }
 }

@@ -15,12 +15,12 @@ const Looks = ({ looks }) => {
                 return (
                     <li key={ id }>
                         <h3>Look { id }</h3>
-                        <img src={ `data:image/png;base64,${topImage}` } style={{ height: 100 }} />
-                        <img src={ `data:image/png;base64,${outerwearImage}` } style={{ height: 100 }} />
+                        <img src={ topImage && `data:image/png;base64,${ topImage }` } style={{ height: 100 }} />
+                        <img src={ outerwearImage && `data:image/png;base64,${ outerwearImage }` } style={{ height: 100 }} />
                         <br />
-                        <img src={ `data:image/png;base64,${bottomImage}` } style={{ height: 100 }} />
+                        <img src={ bottomImage && `data:image/png;base64,${ bottomImage }` } style={{ height: 100 }} />
                         <br />
-                        <img src={ `data:image/png;base64,${shoeImage}` } style={{ height: 100 }} />
+                        <img src={ shoeImage && `data:image/png;base64,${ shoeImage }` } style={{ height: 100 }} />
                         <br />
                         <p>Date: { date }</p>
                         <p>Temperature: { temperature }</p>

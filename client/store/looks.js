@@ -4,11 +4,13 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const SET_LOOKS = 'SET_LOOKS'
+const CREATE_LOOK = 'CREATE_LOOK'
 
 /**
  * ACTION CREATORS
  */
 const setLooks = looks => ({type: SET_LOOKS, looks})
+const saveLook = look => ({type: CREATE_LOOK, look})
 
 /**
  * THUNK CREATORS
@@ -22,6 +24,15 @@ export const fetchLooks = () => async dispatch => {
     return dispatch(setLooks(res.data))
 }
 
+export const createLook = (look) => async dispatch => {
+  const res = await axios.post('/api/looks', look, {
+    headers: {
+      authorization: window.localStorage.getItem('token')
+    }
+  })
+  return dispatch(saveLook(res.data))
+}
+
 
 /**
  * REDUCER
@@ -30,6 +41,8 @@ export default function(state = [], action) {
   switch (action.type) {
     case SET_LOOKS:
       return action.looks
+    case CREATE_LOOK:
+      return [...state, action.look]
     default:
       return state
   }

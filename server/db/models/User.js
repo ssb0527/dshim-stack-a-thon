@@ -81,6 +81,10 @@ User.prototype.getLooks = async function() {
   return looks;
 }
 
+User.prototype.saveLook = async function(look) {
+  return await Look.create({ ...look, userId: this.id });
+}
+
 /**
  * classMethods
  */
