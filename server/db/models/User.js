@@ -93,9 +93,35 @@ User.prototype.deleteLook = async function(lookId) {
 
 User.prototype.addItemToCloset = async function(product) {
   const closet = await this.getCloset();
-  await Product.create({ ...product, closetId: closet.id });
+  if(product.id) {
+    let item = await Product.findOne({
+      where: {
+        id: product.id,
+        closetId: closet.id
+      }
+    });
+    if(
+      product.name === item.name && 
+      product.image === item.image && 
+      product.brandId === item.brandId && 
+      product.categoryId === item.categoryId && 
+      product.colorId === item.colorId
+      ) {
+      await item.destroy()
+    } else {
+      await item.update(product);
+    }
+  } else {
+    await Product.create({ ...product, closetId: closet.id });
+  }
   return this.getCloset();
 }
+
+// User.prototype.addItemToCloset = async function(product) {
+//   const closet = await this.getCloset();
+//   await Product.create({ ...product, closetId: closet.id });
+//   return this.getCloset();
+// }
 
 /**
  * classMethods

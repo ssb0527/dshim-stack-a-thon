@@ -25,7 +25,7 @@ const Looks = ({ looks, deleteLook }) => {
                         <br />
                         <p>Date: { date }</p>
                         <p>Note: { !note ? 'n/a' : note }</p>
-                        <button onClick={ () => deleteLook(look) }>Remove</button>
+                        <button onClick={ () => deleteLook(look) }>delete</button>
                     </li>
                 )
             })

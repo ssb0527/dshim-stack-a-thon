@@ -33,6 +33,16 @@ export const addItemToCloset = (product, history) => async dispatch => {
   return
 }
 
+export const editItem = (product) => async dispatch => {
+  const res = await axios.put('/api/closets', product, {
+    headers: {
+      authorization: window.localStorage.getItem('token')
+    }
+  })
+  dispatch(setCloset(res.data))
+  return
+}
+
 
 /**
  * REDUCER

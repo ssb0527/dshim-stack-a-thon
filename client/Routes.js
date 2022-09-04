@@ -8,6 +8,7 @@ import Products from './components/Closet'
 import {fetchBrands, fetchCatTemps, fetchCloset, fetchLooks, fetchCategories, fetchColors, me} from './store'
 import Looks from './components/Looks';
 import ProductForm from './components/ProductForm';
+import ProductEdit from './components/ProductEdit';
 
 /**
  * COMPONENT
@@ -31,6 +32,7 @@ class Routes extends Component {
             <Route path="/shop" component={ Shop } />
             <Route path="/mycloset/:filter?" component={ Products } />
             <Route path="/addNewItem" component={ ProductForm } />
+            <Route path="/itemdetail/:id" component={ ProductEdit } />
             <Route path="/looks" component={ Looks } />
             <Redirect to="/home" />
           </Switch>

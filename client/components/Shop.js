@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 const Shop = ({ brands }) => {
   return (
     <div>
-      <h3>This is Shop</h3>
+      <h3>Shop</h3>
       <ul style={{ display: 'flex' }}>
         {
             brands.map(brand => {

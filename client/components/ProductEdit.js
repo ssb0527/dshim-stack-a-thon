@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { addItemToCloset } from '../store';
+import { editItem } from '../store';
 import {Link} from 'react-router-dom'
 
 /**
  * COMPONENT
  */
-class ProductForm extends Component {
+class ProductEdit extends Component {
     constructor() {
         super();
         this.state = {
@@ -19,25 +19,25 @@ class ProductForm extends Component {
         this.save = this.save.bind(this);
     }
     componentDidMount() {
-        this.el.addEventListener('change', ev => {
-            const file = ev.target.files[0];
-            const reader = new FileReader();
-            reader.addEventListener('load', () => {
-                this.setState({ image: reader.result.slice(22) });
-            })
-            reader.readAsDataURL(file);
+        this.setState({
+            name: this.props.product.name,
+            image: this.props.product.image,
+            brandId: this.props.product.brandId,
+            categoryId: this.props.product.categoryId,
+            colorId: this.props.product.colorId
         })
     }
     save(ev) {
         ev.preventDefault();
         const product = {
+            id: this.props.product.id,
             name: this.state.name,
             image: this.state.image,
             brandId: this.state.brandId * 1,
             categoryId: this.state.categoryId * 1,
             colorId: this.state.colorId * 1
         };
-        this.props.addItemToCloset(product);
+        this.props.editItem(product);
     }
     render() {
         const { name, image, brandId, categoryId, colorId } = this.state;
@@ -46,12 +46,11 @@ class ProductForm extends Component {
         return (
             <div>
             <Link to='/mycloset'>Return to Closet</Link>
-            <h3>Add New Item to My Closet</h3>
+            <h3>Item Detail</h3>
             <form onSubmit={ save }>
                 <p>Item Image</p>
                 <img src={ image && `data:image/png;base64,${ image }` } style={{ height: 200 }} />
                 <br />
-                <input type='file' ref={ el => this.el = el }/><br />
                 <p>Item Name</p>
                 <input value={ name } onChange={ ev => this.setState({ name: ev.target.value })} />
                 <p>Brand</p>
@@ -88,7 +87,7 @@ class ProductForm extends Component {
                         }
                 </select>
                 <br />
-                <button disabled={ !image || !name || !brandId || !categoryId || !colorId }>Add</button>
+                <button disabled={ !image || !name || !brandId || !categoryId || !colorId }>Edit</button>
             </form>
             </div>
         )
@@ -98,16 +97,21 @@ class ProductForm extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
-  return state
+const mapState = (state, { match }) => {
+    const id = match.params.id * 1;
+    const product = state.closet.products.find(product => product.id === id * 1)
+    return {
+        ...state,
+        product
+    }
 }
 
-const mapDispatch = (dispatch, { history }) => {
+const mapDispatch = (dispatch) => {
     return {
-      addItemToCloset(product) {
-        dispatch(addItemToCloset(product, history))
+      editItem(product) {
+        dispatch(editItem(product))
       }
     }
   }
 
-export default connect(mapState, mapDispatch)(ProductForm)
+export default connect(mapState, mapDispatch)(ProductEdit)

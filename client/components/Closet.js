@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import { createLook } from '../store';
+import { createLook, editItem } from '../store';
 
 /**
  * COMPONENT
@@ -32,8 +32,8 @@ class Products extends Component {
     this.props.createLook(look);
   }
   render() {
-    const { closet: { products }, catTemps, match } = this.props;
-    const { Outerwear, Tops, Bottoms, Shoes, date, temperature, note } = this.state;
+    const { closet: { products }, catTemps, match, deleteItem } = this.props;
+    const { Outerwear, Tops, Bottoms, Shoes, date, note } = this.state;
     const { save } = this;
     
     const filter = match.params.filter ? JSON.parse(match.params.filter) : {};
@@ -235,6 +235,9 @@ class Products extends Component {
                                 alt={ product.name } style={{ height: 150 }} 
                                 onClick={ () => this.setState({ [ family.name ]: product.image}) }
                               />
+                              <br />
+                              <Link to={`/itemdetail/${product.id}`}><button style={{backgroundColor: 'transparent', border: 'none'}}>detail</button></Link>
+                              <button onClick={() => deleteItem(product)} style={{backgroundColor: 'transparent', border: 'none'}}>delete</button>
                             </li>
                           )
                         })
@@ -286,6 +289,9 @@ const mapDispatch = dispatch => {
   return {
     createLook(look) {
       dispatch(createLook(look))
+    },
+    deleteItem(product) {
+      dispatch(editItem(product))
     }
   }
 }
