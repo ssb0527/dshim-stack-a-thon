@@ -48,7 +48,8 @@ async function seed() {
     shoes,
     hats,
     bags,
-    socks
+    socks,
+    scarves
   ] = await Promise.all([
     'Outerwear',
     'Tops',
@@ -56,7 +57,8 @@ async function seed() {
     'Shoes',
     'Hats',
     'Bags',
-    'Socks'
+    'Socks',
+    'Scarves'
   ].map(name => Family.create({ name }))
   );
 
@@ -87,7 +89,8 @@ async function seed() {
     backpacks,
     messengerBags,
     toteBags,
-    sockss
+    _socks,
+    _scarves
   ] = await Promise.all(
     [
       { name: 'Sweaters & Cardigans', familyId: tops.id },
@@ -115,7 +118,8 @@ async function seed() {
       { name: 'Backpacks', familyId: bags.id },
       { name: 'Messenger Bags', familyId: bags.id },
       { name: 'Tote Bags', familyId: bags.id },
-      { name: 'Socks', familyId: socks.id }
+      { name: 'Socks', familyId: socks.id },
+      { name: 'Scarves', familyId: scarves.id }
     ].map(category => Category.create(category))
   );
 
@@ -206,8 +210,63 @@ async function seed() {
     CatTemp.create({ categoryId: sneakers.id, temperatureId: fiftyFourToSixtyTwo.id }),
     CatTemp.create({ categoryId: sneakers.id, temperatureId: fourtyEightToFiftyThree.id }),
     CatTemp.create({ categoryId: sneakers.id, temperatureId: fourtyOneToFourtySeven.id }),
-    CatTemp.create({ categoryId: sneakers.id, temperatureId: fourtyOrLower.id })
+    CatTemp.create({ categoryId: sneakers.id, temperatureId: fourtyOrLower.id }),
+    CatTemp.create({ categoryId: bucketHats.id, temperatureId: eightyTwoOrHigher.id }),
+    CatTemp.create({ categoryId: bucketHats.id, temperatureId: seventyThreeToEightyOne.id }),
+    CatTemp.create({ categoryId: bucketHats.id, temperatureId: sixtyEightToSeventyTwo.id }),
+    CatTemp.create({ categoryId: bucketHats.id, temperatureId: sixtyThreeToSixtySeven.id }),
+    CatTemp.create({ categoryId: bucketHats.id, temperatureId: fiftyFourToSixtyTwo.id }),
+    CatTemp.create({ categoryId: bucketHats.id, temperatureId: fourtyEightToFiftyThree.id }),
+    CatTemp.create({ categoryId: caps.id, temperatureId: eightyTwoOrHigher.id }),
+    CatTemp.create({ categoryId: caps.id, temperatureId: seventyThreeToEightyOne.id }),
+    CatTemp.create({ categoryId: caps.id, temperatureId: sixtyEightToSeventyTwo.id }),
+    CatTemp.create({ categoryId: caps.id, temperatureId: sixtyThreeToSixtySeven.id }),
+    CatTemp.create({ categoryId: caps.id, temperatureId: fiftyFourToSixtyTwo.id }),
+    CatTemp.create({ categoryId: caps.id, temperatureId: fourtyEightToFiftyThree.id }),
+    CatTemp.create({ categoryId: caps.id, temperatureId: fourtyOneToFourtySeven.id }),
+    CatTemp.create({ categoryId: caps.id, temperatureId: fourtyOrLower.id }),
+    CatTemp.create({ categoryId: beanies.id, temperatureId: fiftyFourToSixtyTwo.id }),
+    CatTemp.create({ categoryId: beanies.id, temperatureId: fourtyEightToFiftyThree.id }),
+    CatTemp.create({ categoryId: beanies.id, temperatureId: fourtyOneToFourtySeven.id }),
+    CatTemp.create({ categoryId: beanies.id, temperatureId: fourtyOrLower.id }),
+    CatTemp.create({ categoryId: backpacks.id, temperatureId: eightyTwoOrHigher.id }),
+    CatTemp.create({ categoryId: backpacks.id, temperatureId: seventyThreeToEightyOne.id }),
+    CatTemp.create({ categoryId: backpacks.id, temperatureId: sixtyEightToSeventyTwo.id }),
+    CatTemp.create({ categoryId: backpacks.id, temperatureId: sixtyThreeToSixtySeven.id }),
+    CatTemp.create({ categoryId: backpacks.id, temperatureId: fiftyFourToSixtyTwo.id }),
+    CatTemp.create({ categoryId: backpacks.id, temperatureId: fourtyEightToFiftyThree.id }),
+    CatTemp.create({ categoryId: backpacks.id, temperatureId: fourtyOneToFourtySeven.id }),
+    CatTemp.create({ categoryId: backpacks.id, temperatureId: fourtyOrLower.id }),
+    CatTemp.create({ categoryId: messengerBags.id, temperatureId: eightyTwoOrHigher.id }),
+    CatTemp.create({ categoryId: messengerBags.id, temperatureId: seventyThreeToEightyOne.id }),
+    CatTemp.create({ categoryId: messengerBags.id, temperatureId: sixtyEightToSeventyTwo.id }),
+    CatTemp.create({ categoryId: messengerBags.id, temperatureId: sixtyThreeToSixtySeven.id }),
+    CatTemp.create({ categoryId: messengerBags.id, temperatureId: fiftyFourToSixtyTwo.id }),
+    CatTemp.create({ categoryId: messengerBags.id, temperatureId: fourtyEightToFiftyThree.id }),
+    CatTemp.create({ categoryId: messengerBags.id, temperatureId: fourtyOneToFourtySeven.id }),
+    CatTemp.create({ categoryId: messengerBags.id, temperatureId: fourtyOrLower.id }),
+    CatTemp.create({ categoryId: toteBags.id, temperatureId: eightyTwoOrHigher.id }),
+    CatTemp.create({ categoryId: toteBags.id, temperatureId: seventyThreeToEightyOne.id }),
+    CatTemp.create({ categoryId: toteBags.id, temperatureId: sixtyEightToSeventyTwo.id }),
+    CatTemp.create({ categoryId: toteBags.id, temperatureId: sixtyThreeToSixtySeven.id }),
+    CatTemp.create({ categoryId: toteBags.id, temperatureId: fiftyFourToSixtyTwo.id }),
+    CatTemp.create({ categoryId: toteBags.id, temperatureId: fourtyEightToFiftyThree.id }),
+    CatTemp.create({ categoryId: toteBags.id, temperatureId: fourtyOneToFourtySeven.id }),
+    CatTemp.create({ categoryId: toteBags.id, temperatureId: fourtyOrLower.id }),
+    CatTemp.create({ categoryId: _socks.id, temperatureId: eightyTwoOrHigher.id }),
+    CatTemp.create({ categoryId: _socks.id, temperatureId: seventyThreeToEightyOne.id }),
+    CatTemp.create({ categoryId: _socks.id, temperatureId: sixtyEightToSeventyTwo.id }),
+    CatTemp.create({ categoryId: _socks.id, temperatureId: sixtyThreeToSixtySeven.id }),
+    CatTemp.create({ categoryId: _socks.id, temperatureId: fiftyFourToSixtyTwo.id }),
+    CatTemp.create({ categoryId: _socks.id, temperatureId: fourtyEightToFiftyThree.id }),
+    CatTemp.create({ categoryId: _socks.id, temperatureId: fourtyOneToFourtySeven.id }),
+    CatTemp.create({ categoryId: _socks.id, temperatureId: fourtyOrLower.id }),
+    CatTemp.create({ categoryId: _scarves.id, temperatureId: fourtyEightToFiftyThree.id }),
+    CatTemp.create({ categoryId: _scarves.id, temperatureId: fourtyOneToFourtySeven.id }),
+    CatTemp.create({ categoryId: _scarves.id, temperatureId: fourtyOrLower.id }),
   ])
+
+
 
   // Creating Colors
   const [
@@ -259,8 +318,16 @@ async function seed() {
     Product.create({ name: 'Nike Stussy Air Force Sneakers', image: await readFile('./public/images/products/nike stussy air force.png'), closetId: davidCloset.id, brandId: nike.id, categoryId: sneakers.id, colorId: white.id }),
     Product.create({ name: 'COS Black Bucket Hat', image: await readFile('./public/images/products/cos black bucket hat.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: bucketHats.id, colorId: black.id }),
     Product.create({ name: 'COS Natural Large Shoulder Bag', image: await readFile('./public/images/products/cos natural large shoulder bag.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: messengerBags.id, colorId: beige.id }),
-    Product.create({ name: 'Uniqlo White Long Socks', image: await readFile('./public/images/products/uniqlo white long socks.png'), closetId: davidCloset.id, brandId: uniqlo.id, categoryId: sockss.id, colorId: white.id }),
-    Product.create({ name: 'Uniqlo Black Long Socks', image: await readFile('./public/images/products/uniqlo black long socks.png'), closetId: davidCloset.id, brandId: uniqlo.id, categoryId: sockss.id, colorId: black.id })
+    Product.create({ name: 'Uniqlo White Long Socks', image: await readFile('./public/images/products/uniqlo white long socks.png'), closetId: davidCloset.id, brandId: uniqlo.id, categoryId: _socks.id, colorId: white.id }),
+    Product.create({ name: 'Uniqlo Black Long Socks', image: await readFile('./public/images/products/uniqlo black long socks.png'), closetId: davidCloset.id, brandId: uniqlo.id, categoryId: _socks.id, colorId: black.id }),
+    Product.create({ name: 'Acne Studios Green Chekced Scarf', image: await readFile('./public/images/products/acne studios green checked scarf.png'), closetId: davidCloset.id, brandId: acneStudios.id, categoryId: _scarves.id, colorId: green.id }),
+    Product.create({ name: 'Acne Studios Grey Canada Scarf', image: await readFile('./public/images/products/acne studios grey canada scarf.png'), closetId: davidCloset.id, brandId: acneStudios.id, categoryId: _scarves.id, colorId: grey.id }),
+    Product.create({ name: 'COS Beige Boucle Knit Cardigan', image: await readFile('./public/images/products/cos beige boucle knit cardigan.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: sweatersCardigans.id, colorId: beige.id }),
+    Product.create({ name: 'COS Beige Wide Leg Pants', image: await readFile('./public/images/products/cos beige wide leg pants.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: pants.id, colorId: beige.id }),
+    Product.create({ name: 'COS Black Pleated Tote Bag', image: await readFile('./public/images/products/cos black pleated tote bag.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: toteBags.id, colorId: black.id }),
+    Product.create({ name: 'COS Black Pleated Wide Leg Pants', image: await readFile('./public/images/products/cos black pleated wide leg pants.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: pants.id, colorId: black.id }),
+    Product.create({ name: 'COS Black Rubber Slides', image: await readFile('./public/images/products/cos black rubber slides.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: sandals.id, colorId: black.id }),
+    Product.create({ name: 'COS Navy Knit Short Sleeve Shirt', image: await readFile('./public/images/products/cos navy knit shirt.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: tShirts.id, colorId: navy.id })
   ])
 
   // Creating Looks
@@ -270,6 +337,7 @@ async function seed() {
       topImage: await readFile('./public/images/products/cos black sweater.png'), 
       bottomImage: await readFile('./public/images/products/cos black jeans.png'), 
       shoeImage: await readFile('./public/images/products/bottega veneta lug chelsea boots.png'),
+      sockImage:await readFile('./public/images/products/uniqlo black long socks.png'),
       date: '2022-01-15',
       temperature: '40°F or lower',
       note: 'Snowy day',
@@ -280,9 +348,22 @@ async function seed() {
       topImage: await readFile('./public/images/products/alexander wang grey hoodie.png'), 
       bottomImage: await readFile('./public/images/products/cos light blue jeans.png'), 
       shoeImage: await readFile('./public/images/products/nike stussy air force.png'),
+      bagImage: await readFile('./public/images/products/cos natural large shoulder bag.png'),
+      sockImage: await readFile('./public/images/products/uniqlo white long socks.png'),
       date: '2022-04-07',
       temperature: '48-53°F',
       note: 'Shopping in soho', 
+      userId: david.id
+    }),
+    Look.create({ 
+      hatImage: await readFile('./public/images/products/cos black bucket hat.png'), 
+      topImage: await readFile('./public/images/products/cos navy knit shirt.png'), 
+      bottomImage: await readFile('./public/images/products/cos black pleated wide leg pants.png'), 
+      shoeImage: await readFile('./public/images/products/cos black rubber slides.png'),
+      bagImage: await readFile('./public/images/products/cos black pleated tote bag.png'),
+      date: '2022-08-14',
+      temperature: '48-53°F',
+      note: 'Brunch on Sunday', 
       userId: david.id
     })
   ])  

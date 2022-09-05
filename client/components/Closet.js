@@ -11,6 +11,7 @@ class Products extends Component {
     super();
     this.state = {
       Hats: '',
+      Scarves: '',
       Outerwear: '',
       Tops: '',
       Bottoms: '',
@@ -26,6 +27,7 @@ class Products extends Component {
     ev.preventDefault();
     const look = {
       hatImage: this.state.Hats,
+      scarfImage: this.state.Scarves,
       outerwearImage: this.state.Outerwear,
       topImage: this.state.Tops,
       bottomImage: this.state.Bottoms,
@@ -39,7 +41,7 @@ class Products extends Component {
   }
   render() {
     const { closet: { products }, catTemps, match, deleteItem } = this.props;
-    const { Hats, Outerwear, Tops, Bottoms, Shoes, Bags, Socks, date, note } = this.state;
+    const { Hats, Outerwear, Tops, Bottoms, Shoes, Bags, Socks, Scarves, date, note } = this.state;
     const { save } = this;
     
     const filter = match.params.filter ? JSON.parse(match.params.filter) : {};
@@ -263,12 +265,13 @@ class Products extends Component {
             <br />
             <img src={ Tops && `data:image/png;base64,${ Tops }` } onClick={ () => this.setState({ Tops: '' })} style={{ height: 100 }} />
             <img src={ Outerwear && `data:image/png;base64,${ Outerwear }` } onClick={ () => this.setState({ Outerwear: '' })} style={{ height: 100 }} />
+            <img src={ Scarves && `data:image/png;base64,${ Scarves }` } onClick={ () => this.setState({ Scarves: '' })} style={{ height: 100 }} />
             <br />
             <img src={ Bottoms && `data:image/png;base64,${ Bottoms }` } onClick={ () => this.setState({ Bottoms: '' })} style={{ height: 100 }} />
             <img src={ Bags && `data:image/png;base64,${ Bags }` } onClick={ () => this.setState({ Bags: '' })} style={{ height: 100 }} />
             <br />
-            <img src={ Shoes && `data:image/png;base64,${ Shoes }` } onClick={ () => this.setState({ Shoes: '' })} style={{ height: 50 }} />
-            <img src={ Socks && `data:image/png;base64,${ Socks }` } onClick={ () => this.setState({ Socks: '' })} style={{ height: 50 }} />
+            <img src={ Shoes && `data:image/png;base64,${ Shoes }` } onClick={ () => this.setState({ Shoes: '' })} style={{ height: 70, marginRight: 10 }} />
+            <img src={ Socks && `data:image/png;base64,${ Socks }` } onClick={ () => this.setState({ Socks: '' })} style={{ height: 60 }} />
             <br/>
             <p>Date</p>
             <input type='date' value={ date } onChange={ ev => this.setState({ date: ev.target.value })} />

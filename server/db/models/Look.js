@@ -24,6 +24,9 @@ const Look = db.define('look', {
    sockImage: {
       type: TEXT
    },
+   scarfImage: {
+      type: TEXT
+   },
    date: {
     type: DATEONLY
    },

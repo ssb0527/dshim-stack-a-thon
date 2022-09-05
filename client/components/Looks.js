@@ -12,7 +12,7 @@ const Looks = ({ looks, deleteLook }) => {
       <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
         {
             looks.map(look => {
-                const { id, hatImage, outerwearImage, topImage, bottomImage, shoeImage, bagImage, sockImage, date, note } = look
+                const { id, hatImage, scarfImage, outerwearImage, topImage, bottomImage, shoeImage, bagImage, sockImage, date, note } = look
                 return (
                     <li key={ id }>
                         <h3>Look { id }</h3>
@@ -20,12 +20,13 @@ const Looks = ({ looks, deleteLook }) => {
                         <br />
                         <img src={ topImage && `data:image/png;base64,${ topImage }` } style={{ height: 100 }} />
                         <img src={ outerwearImage && `data:image/png;base64,${ outerwearImage }` } style={{ height: 100 }} />
+                        <img src={ scarfImage && `data:image/png;base64,${ scarfImage }` } style={{ height: 100 }} />
                         <br />
                         <img src={ bottomImage && `data:image/png;base64,${ bottomImage }` } style={{ height: 100 }} />
                         <img src={ bagImage && `data:image/png;base64,${ bagImage }` } style={{ height: 100 }} />
                         <br />
-                        <img src={ shoeImage && `data:image/png;base64,${ shoeImage }` } style={{ height: 50 }} />
-                        <img src={ sockImage && `data:image/png;base64,${ sockImage }` } style={{ height: 50 }} />
+                        <img src={ shoeImage && `data:image/png;base64,${ shoeImage }` } style={{ height: 70, marginRight: 10 }} />
+                        <img src={ sockImage && `data:image/png;base64,${ sockImage }` } style={{ height: 60 }} />
                         <br />
                         <p>Date: { date }</p>
                         <p>Note: { !note ? 'n/a' : note }</p>
