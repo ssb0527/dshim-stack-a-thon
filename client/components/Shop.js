@@ -15,7 +15,7 @@ const Shop = ({ brands }) => {
                 return (
                     <li key={ id }>
                         <a href={ link } target='_blank'>
-                            <img src={ `data:image/png;base64,${image}` } alt={ name } style={{ height: 200, width: 200, borderRadius: 20 }} />
+                            <img src={ `data:image/png;base64,${image}` } alt={ name } style={{ height: 175, width: 175, borderRadius: 20 }} />
                         </a>
                     </li>
                 )

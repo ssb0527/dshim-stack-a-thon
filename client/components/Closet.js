@@ -142,11 +142,11 @@ class Products extends Component {
     const familyEntries = Object.values(familyMap)
 
     return (
-      <div id='myCloset'>
+      <div className='myCloset'>
         {/* Facet Search */}
-        <div id='search'>
+        <div className='search'>
             <h4>Temperature</h4>
-            <ul>
+            <ul className='search-list'>
               {
                 temperatureEntries.map(entry => {
                   const _filter = { ...filter, temperatureId: entry.id };
@@ -165,7 +165,7 @@ class Products extends Component {
               }
             </ul>
             <h4>Category</h4>
-            <ul>
+            <ul className='search-list'>
               {
                 categoryEntries.map(entry => {
                   const _filter = { ...filter, categoryId: entry.id };
@@ -184,7 +184,7 @@ class Products extends Component {
               }
             </ul>
             <h4>Color</h4>
-            <ul>
+            <ul className='search-list'>
               {
                 colorEntries.map(entry => {
                   const _filter = { ...filter, colorId: entry.id };
@@ -203,7 +203,7 @@ class Products extends Component {
               }
             </ul>
             <h4>Brand</h4>
-            <ul>
+            <ul className='search-list'>
               {
                 brandEntries.map(entry => {
                   const _filter = { ...filter, brandId: entry.id };
@@ -223,9 +223,11 @@ class Products extends Component {
             </ul>
         </div>
         {/* Closet */}
-        <div id='closet'>
-          <h2>My Closet</h2>
-          <Link to='/addNewItem'>Add New Item to My Closet</Link>
+        <div className='closet'>
+          <div className='closetHeader'>
+            <h2>My Closet</h2>
+            <Link to='/addNewItem' style={{ marginRight: 50 }}>Add New Item to My Closet</Link>
+          </div>
           <ul>
             {
               familyEntries.map(family => {
@@ -233,19 +235,23 @@ class Products extends Component {
                 return (
                   <li key={ family.id }>
                     <h3>{ family.name }</h3>
-                    <ul id='closetList'>
+                    <ul className='closetList'>
                       {
                         familyProducts.map(product => {
                           return (
-                            <li key={ product.id }><img 
-                                src={ `data:image/png;base64,${ product.image }` } 
-                                alt={ product.name } 
-                                style={ product.category.family.name === 'Hats' ? { height: 70 } : { height: 150 } } 
-                                onClick={ () => this.setState({ [ family.name ]: product.image}) }
-                              />
-                              <br />
-                              <Link to={`/itemdetail/${product.id}`}><button style={{backgroundColor: 'transparent', border: 'none'}}>detail</button></Link>
-                              <button onClick={() => deleteItem(product)} style={{backgroundColor: 'transparent', border: 'none'}}>delete</button>
+                            <li key={ product.id }>
+                              <div style={{ textAlign: 'center' }}>
+                                <img 
+                                  src={ `data:image/png;base64,${ product.image }` } 
+                                  alt={ product.name } 
+                                  style={ product.category.family.name === 'Hats' ? { height: 70 } : { height: 150 } } 
+                                  onClick={ () => this.setState({ [ family.name ]: product.image}) }
+                                />
+                              </div>
+                              <div style={{ textAlign: 'center' }}>
+                                <Link to={`/itemdetail/${product.id}`}><button style={{backgroundColor: 'transparent', border: 'none'}}>details</button></Link>
+                                <button onClick={() => deleteItem(product)} style={{backgroundColor: 'transparent', border: 'none'}}>delete</button>
+                              </div>
                             </li>
                           )
                         })
@@ -258,28 +264,35 @@ class Products extends Component {
           </ul>
         </div>
         {/* OOTD */}
-        <div id='ootd'>
+        <div className='search'></div>
+        <div className='ootd-bar'>
           <h4>Outfit of the Day</h4>
           <form onSubmit={ save }>
-            <img src={ Hats && `data:image/png;base64,${ Hats }` } onClick={ () => this.setState({ Hats: '' })} style={{ height: 30 }} />
-            <br />
-            <img src={ Tops && `data:image/png;base64,${ Tops }` } onClick={ () => this.setState({ Tops: '' })} style={{ height: 100 }} />
-            <img src={ Outerwear && `data:image/png;base64,${ Outerwear }` } onClick={ () => this.setState({ Outerwear: '' })} style={{ height: 100 }} />
-            <img src={ Scarves && `data:image/png;base64,${ Scarves }` } onClick={ () => this.setState({ Scarves: '' })} style={{ height: 100 }} />
-            <br />
-            <img src={ Bottoms && `data:image/png;base64,${ Bottoms }` } onClick={ () => this.setState({ Bottoms: '' })} style={{ height: 100 }} />
-            <img src={ Bags && `data:image/png;base64,${ Bags }` } onClick={ () => this.setState({ Bags: '' })} style={{ height: 100 }} />
-            <br />
-            <img src={ Shoes && `data:image/png;base64,${ Shoes }` } onClick={ () => this.setState({ Shoes: '' })} style={{ height: 70, marginRight: 10 }} />
-            <img src={ Socks && `data:image/png;base64,${ Socks }` } onClick={ () => this.setState({ Socks: '' })} style={{ height: 60 }} />
-            <br/>
+            <div className='ootdParentContainer'>
+              <div className='ootdChildContainer-1'>
+                <img src={ Hats && `data:image/png;base64,${ Hats }` } onClick={ () => this.setState({ Hats: '' })} style={{ height: 30, marginBottom: 10 }} />
+                <img src={ Tops && `data:image/png;base64,${ Tops }` } onClick={ () => this.setState({ Tops: '' })} style={{ height: 100 }} />
+                <img src={ Bottoms && `data:image/png;base64,${ Bottoms }` } onClick={ () => this.setState({ Bottoms: '' })} style={{ height: 100 }} />
+                <img src={ Shoes && `data:image/png;base64,${ Shoes }` } onClick={ () => this.setState({ Shoes: '' })} style={{ height: 70 }} />
+              </div>
+              <div className='ootdChildContainer-2'>
+                <img src={ Outerwear && `data:image/png;base64,${ Outerwear }` } onClick={ () => this.setState({ Outerwear: '' })} style={{ height: 100 }} />
+                <img src={ Bags && `data:image/png;base64,${ Bags }` } onClick={ () => this.setState({ Bags: '' })} style={{ height: 100 }} />
+                <img src={ Socks && `data:image/png;base64,${ Socks }` } onClick={ () => this.setState({ Socks: '' })} style={{ height: 60, marginTop: 10 }} />
+              </div>
+              <div className='ootdChildContainer-2'>
+                <img src={ Scarves && `data:image/png;base64,${ Scarves }` } onClick={ () => this.setState({ Scarves: '' })} style={{ height: 100 }} />
+              </div>
+            </div>
             <p>Date</p>
             <input type='date' value={ date } onChange={ ev => this.setState({ date: ev.target.value })} />
             <br />
             <p>Note</p>
             <textarea placeholder='Special occasion?' value={ note } onChange={ ev => this.setState({ note: ev.target.value })}/>
             <br/>
-            <button disabled={ !date }>Save Look</button>
+            <div style={{ textAlign: 'center' }}>
+              <button disabled={ !date }>Save Look</button>
+            </div>
           </form>
         </div>
       </div>

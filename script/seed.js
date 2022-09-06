@@ -449,7 +449,7 @@ async function seed() {
     Product.create({ name: 'COS White Pants', image: await readFile('./public/images/products/cos white pants.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: pants.id, colorId: white.id }),
     Product.create({ name: 'COS Yellow Sweater', image: await readFile('./public/images/products/cos yellow sweater.png'), closetId: davidCloset.id, brandId: cos.id, categoryId: sweaters.id, colorId: yellow.id }),
     Product.create({ name: 'Gucci Black Horsebit Loafer', image: await readFile('./public/images/products/gucci black horsebit loafer.png'), closetId: davidCloset.id, brandId: gucci.id, categoryId: loafers.id, colorId: black.id }),
-    Product.create({ name: 'Gucci Ivory Rhyton Sneakers', image: await readFile('./public/images/products/gucci off white rhyton sneakers.png'), closetId: davidCloset.id, brandId: gucci.id, categoryId: sneakers.id, colorId: white.id }),
+    Product.create({ name: 'Gucci Ivory Rhyton Sneakers', image: await readFile('./public/images/products/gucci off white rhyton sneakers.png'), closetId: davidCloset.id, brandId: gucci.id, categoryId: sneakers.id, colorId: beige.id }),
     Product.create({ name: 'Lemaire Black Large Croissant Bag', image: await readFile('./public/images/products/lemaire black large croissant bag.png'), closetId: davidCloset.id, brandId: lemaire.id, categoryId: crossbodyBags.id, colorId: black.id }),
     Product.create({ name: 'Margiela Black Tabi Loafers', image: await readFile('./public/images/products/margiela black tabi loafers.png'), closetId: davidCloset.id, brandId: maisonMargiela.id, categoryId: loafers.id, colorId: black.id }),
     Product.create({ name: 'Margiela Black Tabi Sneakers', image: await readFile('./public/images/products/margiela black tabi sneakers.png'), closetId: davidCloset.id, brandId: maisonMargiela.id, categoryId: sneakers.id, colorId: black.id }),
@@ -474,6 +474,7 @@ async function seed() {
     Product.create({ name: 'Saint Laurent Distressed Skinny Jeans', image: await readFile('./public/images/products/saint laurent blue distressed skinny jeans.png'), closetId: davidCloset.id, brandId: saintLaurent.id, categoryId: jeans.id, colorId: blue.id }),
     Product.create({ name: 'SaTurday of Us Beige Jeans', image: await readFile('./public/images/products/stu beige jeans.png'), closetId: davidCloset.id, brandId: stu.id, categoryId: jeans.id, colorId: beige.id }),
     Product.create({ name: 'SaTurday of Us Distressed Jeans', image: await readFile('./public/images/products/stu blue distressed jeans.png'), closetId: davidCloset.id, brandId: stu.id, categoryId: jeans.id, colorId: blue.id }),
+    Product.create({ name: 'Thom Browne Black Business Bag', image: await readFile('./public/images/products/thom browne black business bag.png'), closetId: davidCloset.id, brandId: thomBrowne.id, categoryId: toteBags.id, colorId: black.id }),
     Product.create({ name: 'Thom Browne Black Brogues', image: await readFile('./public/images/products/thom browne black derby.png'), closetId: davidCloset.id, brandId: thomBrowne.id, categoryId: laceUps.id, colorId: black.id }),
     Product.create({ name: 'Thom Browne Dark Grey Cardigan', image: await readFile('./public/images/products/thom browne grey cardigan.png'), closetId: davidCloset.id, brandId: thomBrowne.id, categoryId: cardigans.id, colorId: grey.id }),
     Product.create({ name: 'Thom Browne Medium Grey Trousers', image: await readFile('./public/images/products/thom browne grey trousers.png'), closetId: davidCloset.id, brandId: thomBrowne.id, categoryId: pants.id, colorId: grey.id }),
@@ -482,7 +483,7 @@ async function seed() {
   ])
 
   // Creating Looks
-  await Promise.all([
+  const [ lookOne, lookTwo, lookThree, lookFour, lookFive, lookSix, lookSeven ] = await Promise.all([
     Look.create({ 
       outerwearImage: await readFile('./public/images/products/acne studios shearling jacket.png'), 
       topImage: await readFile('./public/images/products/cos black sweater.png'), 
@@ -490,7 +491,6 @@ async function seed() {
       shoeImage: await readFile('./public/images/products/bottega veneta lug chelsea boots.png'),
       sockImage:await readFile('./public/images/products/uniqlo black long socks.png'),
       date: '2022-01-15',
-      temperature: '40°F or lower',
       note: 'Snowy day',
       userId: david.id
     }),
@@ -502,21 +502,61 @@ async function seed() {
       bagImage: await readFile('./public/images/products/cos natural large shoulder bag.png'),
       sockImage: await readFile('./public/images/products/uniqlo white long socks.png'),
       date: '2022-04-07',
-      temperature: '48-53°F',
       note: 'Shopping in soho', 
       userId: david.id
     }),
     Look.create({ 
-      hatImage: await readFile('./public/images/products/cos black bucket hat.png'), 
+      outerwearImage: await readFile('./public/images/products/acne studios black nate leather jacket.png'), 
+      topImage: await readFile('./public/images/products/alexander wang black tshirt.png'), 
+      bottomImage: await readFile('./public/images/products/saint laurent blue distressed skinny jeans.png'), 
+      shoeImage: await readFile('./public/images/products/saint laurent beige jodphur boots.png'),
+      sockImage: await readFile('./public/images/products/uniqlo black long socks.png'),
+      date: '2022-05-20',
+      note: 'Concert night', 
+      userId: david.id
+    }),
+    Look.create({ 
+      outerwearImage: await readFile('./public/images/products/thom browne grey cardigan.png'), 
+      topImage: await readFile('./public/images/products/thom browne white shirt.png'), 
+      bottomImage: await readFile('./public/images/products/thom browne grey trousers.png'), 
+      shoeImage: await readFile('./public/images/products/thom browne black derby.png'),
+      sockImage: await readFile('./public/images/products/uniqlo black long socks.png'),
+      bagImage: await readFile('./public/images/products/thom browne black business bag.png'),
+      date: '2022-06-07',
+      note: 'Interview day', 
+      userId: david.id
+    }),
+    Look.create({ 
       topImage: await readFile('./public/images/products/cos navy knit shirt.png'), 
       bottomImage: await readFile('./public/images/products/cos black pleated wide leg pants.png'), 
       shoeImage: await readFile('./public/images/products/cos black rubber slides.png'),
       bagImage: await readFile('./public/images/products/cos black pleated tote bag.png'),
-      date: '2022-08-14',
-      temperature: '48-53°F',
+      date: '2022-07-02',
       note: 'Brunch on Sunday', 
       userId: david.id
-    })
+    }),
+    Look.create({ 
+      hatImage: await readFile('./public/images/products/cos off white bucket hat.png'), 
+      topImage: await readFile('./public/images/products/our legacy off white shirt.png'), 
+      bottomImage: await readFile('./public/images/products/cos beige wide leg pants.png'), 
+      shoeImage: await readFile('./public/images/products/nike travis scott beige dunk low.png'),
+      sockImage: await readFile('./public/images/products/uniqlo white long socks.png'),
+      bagImage: await readFile('./public/images/products/cos natural large shoulder bag.png'),
+      date: '2022-07-18',
+      note: 'MoMA with friends', 
+      userId: david.id
+    }),
+    Look.create({ 
+      hatImage: await readFile('./public/images/products/cos black bucket hat.png'), 
+      topImage: await readFile('./public/images/products/alexander wang acid wash tshirt.png'), 
+      bottomImage: await readFile('./public/images/products/alexander wang black shorts.png'), 
+      shoeImage: await readFile('./public/images/products/nike travis scott blue jordan low.png'),
+      sockImage: await readFile('./public/images/products/uniqlo white long socks.png'),
+      bagImage: await readFile('./public/images/products/alexander wang black belt bag.png'),
+      date: '2022-08-11',
+      note: 'Bike ride with Ann', 
+      userId: david.id
+    }),
   ])  
 
   // console.log(`seeded ${users.length} users`)
