@@ -258,7 +258,7 @@ class Products extends Component {
           </ul>
         </div>
         {/* OOTD */}
-        <div>
+        <div id='ootd'>
           <h4>Outfit of the Day</h4>
           <form onSubmit={ save }>
             <img src={ Hats && `data:image/png;base64,${ Hats }` } onClick={ () => this.setState({ Hats: '' })} style={{ height: 30 }} />

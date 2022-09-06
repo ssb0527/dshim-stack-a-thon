@@ -32,11 +32,26 @@ li.selected {
 
 #myCloset {
   display: flex;
+  justify-content: space-between;
 }
 
 #closetList {
   display: flex;
   flex-wrap: wrap;
+}
+
+#search {
+  flex-shrink: 0;
+}
+
+#closet {
+  width: 70%;
+  flex-shrink: 1;
+}
+
+#ootd {
+  width: 20%;
+  flex-shrink: 0;
 }
 
 li {
