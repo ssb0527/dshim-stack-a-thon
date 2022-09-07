@@ -146,7 +146,7 @@ class Products extends Component {
         {/* Facet Search */}
         <div className='search'>
             <h4>Temperature</h4>
-            <ul className='search-list'>
+            <ul className='search-list' style={{ listStyleType: 'none'}}>
               {
                 temperatureEntries.map(entry => {
                   const _filter = { ...filter, temperatureId: entry.id };
@@ -165,7 +165,7 @@ class Products extends Component {
               }
             </ul>
             <h4>Category</h4>
-            <ul className='search-list'>
+            <ul className='search-list' style={{ listStyleType: 'none'}}>
               {
                 categoryEntries.map(entry => {
                   const _filter = { ...filter, categoryId: entry.id };
@@ -184,7 +184,7 @@ class Products extends Component {
               }
             </ul>
             <h4>Color</h4>
-            <ul className='search-list'>
+            <ul className='search-list' style={{ listStyleType: 'none'}}>
               {
                 colorEntries.map(entry => {
                   const _filter = { ...filter, colorId: entry.id };
@@ -203,7 +203,7 @@ class Products extends Component {
               }
             </ul>
             <h4>Brand</h4>
-            <ul className='search-list'>
+            <ul className='search-list' style={{ listStyleType: 'none'}}>
               {
                 brandEntries.map(entry => {
                   const _filter = { ...filter, brandId: entry.id };
@@ -212,7 +212,7 @@ class Products extends Component {
                   }
                   const url = `/mycloset/${JSON.stringify(_filter)}`
                   return (
-                    <li key={ entry.id } className={ filter.brandId === entry.id ? 'selected' : ''}>
+                    <li key={ entry.id } className={ filter.brandId === entry.id ? 'selected' : '' }>
                       <Link to={ url }>
                         { entry.name } ({ entry.count })
                       </Link>
@@ -228,18 +228,18 @@ class Products extends Component {
             <h2>My Closet</h2>
             <Link to='/addNewItem' style={{ marginRight: 50 }}>Add New Item to My Closet</Link>
           </div>
-          <ul>
+          <ul style={{ listStyleType: 'none'}}>
             {
               familyEntries.map(family => {
                 const familyProducts = filtered.filter(product => product.category.familyId === family.id);
                 return (
-                  <li key={ family.id }>
+                  <li key={ family.id } style={{ margin: '10px 25px'}}>
                     <h3>{ family.name }</h3>
-                    <ul className='closetList'>
+                    <ul className='closetList' style={{ listStyleType: 'none'}}>
                       {
                         familyProducts.map(product => {
                           return (
-                            <li key={ product.id }>
+                            <li key={ product.id } style={{ margin: '10px 25px'}}>
                               <div style={{ textAlign: 'center' }}>
                                 <img 
                                   src={ `data:image/png;base64,${ product.image }` } 
@@ -248,9 +248,8 @@ class Products extends Component {
                                   onClick={ () => this.setState({ [ family.name ]: product.image}) }
                                 />
                               </div>
-                              <div style={{ textAlign: 'center' }}>
-                                <Link to={`/itemdetail/${product.id}`}><button style={{backgroundColor: 'transparent', border: 'none'}}>details</button></Link>
-                                <button onClick={() => deleteItem(product)} style={{backgroundColor: 'transparent', border: 'none'}}>delete</button>
+                              <div style={{ textAlign: 'center', fontSize: '0.9rem' }}>
+                                <Link to={`/itemdetail/${product.id}`} style={{ color: 'black' }}>Details</Link>
                               </div>
                             </li>
                           )
@@ -271,12 +270,12 @@ class Products extends Component {
             <div className='ootdParentContainer'>
               <div className='ootdChildContainer-1'>
                 <img src={ Hats && `data:image/png;base64,${ Hats }` } onClick={ () => this.setState({ Hats: '' })} style={{ height: 30, marginBottom: 10 }} />
-                <img src={ Tops && `data:image/png;base64,${ Tops }` } onClick={ () => this.setState({ Tops: '' })} style={{ height: 100 }} />
+                <img src={ Tops && `data:image/png;base64,${ Tops }` } onClick={ () => this.setState({ Tops: '' })} style={{ height: 100, marginBottom: 5 }} />
                 <img src={ Bottoms && `data:image/png;base64,${ Bottoms }` } onClick={ () => this.setState({ Bottoms: '' })} style={{ height: 100 }} />
                 <img src={ Shoes && `data:image/png;base64,${ Shoes }` } onClick={ () => this.setState({ Shoes: '' })} style={{ height: 70 }} />
               </div>
               <div className='ootdChildContainer-2'>
-                <img src={ Outerwear && `data:image/png;base64,${ Outerwear }` } onClick={ () => this.setState({ Outerwear: '' })} style={{ height: 100 }} />
+                <img src={ Outerwear && `data:image/png;base64,${ Outerwear }` } onClick={ () => this.setState({ Outerwear: '' })} style={{ height: 100, marginBottom: 5 }} />
                 <img src={ Bags && `data:image/png;base64,${ Bags }` } onClick={ () => this.setState({ Bags: '' })} style={{ height: 100 }} />
                 <img src={ Socks && `data:image/png;base64,${ Socks }` } onClick={ () => this.setState({ Socks: '' })} style={{ height: 60, marginTop: 10 }} />
               </div>
@@ -315,9 +314,6 @@ const mapDispatch = dispatch => {
   return {
     createLook(look) {
       dispatch(createLook(look))
-    },
-    deleteItem(product) {
-      dispatch(editItem(product))
     }
   }
 }

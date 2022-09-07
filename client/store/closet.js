@@ -43,6 +43,17 @@ export const editItem = (product) => async dispatch => {
   return
 }
 
+export const deleteItem = (product, history) => async dispatch => {
+  const res = await axios.put('/api/closets', product, {
+    headers: {
+      authorization: window.localStorage.getItem('token')
+    }
+  })
+  dispatch(setCloset(res.data))
+  history.push('/mycloset')
+  return
+}
+
 
 /**
  * REDUCER

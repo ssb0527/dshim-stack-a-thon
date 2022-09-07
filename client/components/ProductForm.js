@@ -49,7 +49,7 @@ class ProductForm extends Component {
             <h3>Add New Item to My Closet</h3>
             <form onSubmit={ save }>
                 <p>Item Image</p>
-                <img src={ image && `data:image/png;base64,${ image }` } style={{ height: 200 }} />
+                <img src={ image && `data:image/png;base64,${ image }` } style={{ height: 300 }} />
                 <br />
                 <input type='file' ref={ el => this.el = el }/><br />
                 <p>Item Name</p>

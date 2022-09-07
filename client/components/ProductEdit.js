@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { editItem } from '../store';
+import { deleteItem, editItem } from '../store';
 import {Link} from 'react-router-dom'
 
 /**
@@ -41,7 +41,7 @@ class ProductEdit extends Component {
     }
     render() {
         const { name, image, brandId, categoryId, colorId } = this.state;
-        const { brands, categories, colors } = this.props;
+        const { brands, categories, colors, product, deleteItem } = this.props;
         const { save } = this;
         return (
             <div>
@@ -49,7 +49,7 @@ class ProductEdit extends Component {
             <h3>Item Detail</h3>
             <form onSubmit={ save }>
                 <p>Item Image</p>
-                <img src={ image && `data:image/png;base64,${ image }` } style={{ height: 200 }} />
+                <img src={ image && `data:image/png;base64,${ image }` } style={{ height: 300}} />
                 <br />
                 <p>Item Name</p>
                 <input value={ name } onChange={ ev => this.setState({ name: ev.target.value })} />
@@ -89,6 +89,7 @@ class ProductEdit extends Component {
                 <br />
                 <button disabled={ !image || !name || !brandId || !categoryId || !colorId }>Edit</button>
             </form>
+            <button onClick={() => deleteItem(product)}>Delete</button>
             </div>
         )
     }
@@ -106,10 +107,13 @@ const mapState = (state, { match }) => {
     }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, { history }) => {
     return {
       editItem(product) {
         dispatch(editItem(product))
+      },
+      deleteItem(product) {
+        dispatch(deleteItem(product, history))
       }
     }
   }
