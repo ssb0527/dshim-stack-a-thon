@@ -7,7 +7,7 @@ import { deleteLook } from '../store';
  */
 const Looks = ({ looks, deleteLook }) => {
   return (
-    <div>
+    <div className='container'>
       <h2>Saved Looks</h2>
       <ul style={{ display: 'flex', flexWrap: 'wrap', listStyleType: 'none' }}>
         {

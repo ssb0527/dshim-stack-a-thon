@@ -142,7 +142,7 @@ class Products extends Component {
     const familyEntries = Object.values(familyMap)
 
     return (
-      <div className='myCloset'>
+      <div className='myCloset container'>
         {/* Facet Search */}
         <div className='search'>
             <h4>Temperature</h4>

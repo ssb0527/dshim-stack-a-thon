@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
  */
 const Shop = ({ brands }) => {
   return (
-    <div>
+    <div className='container'>
       <h3>Shop</h3>
       <ul style={{ display: 'flex', flexWrap: 'wrap', listStyleType: 'none' }}>
         {

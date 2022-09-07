@@ -9,6 +9,7 @@ import {fetchBrands, fetchCatTemps, fetchCloset, fetchLooks, fetchCategories, fe
 import Looks from './components/Looks';
 import ProductForm from './components/ProductForm';
 import ProductEdit from './components/ProductEdit';
+import Weather from './components/Weather';
 
 /**
  * COMPONENT
@@ -34,6 +35,7 @@ class Routes extends Component {
             <Route path="/addNewItem" component={ ProductForm } />
             <Route path="/itemdetail/:id" component={ ProductEdit } />
             <Route path="/looks" component={ Looks } />
+            <Route path="/weather" component={ Weather } />
             <Redirect to="/home" />
           </Switch>
         ) : (
