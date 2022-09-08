@@ -4,7 +4,11 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    res.send(await Brand.findAll());
+    res.send(await Brand.findAll({
+      order: [
+        ['name', 'ASC']
+      ]
+    }));
   } 
   catch (err) {
     next(err)

@@ -157,7 +157,7 @@ class Products extends Component {
                   return (
                     <li key={ entry.id } className={ filter.temperatureId === entry.id ? 'selected' : ''}>
                       <Link to={ url }>
-                        { entry.range } ({ entry.count })
+                        { entry.range }
                       </Link>
                     </li>
                   )
@@ -226,7 +226,7 @@ class Products extends Component {
         <div className='closet'>
           <div className='closetHeader'>
             <h2>My Closet</h2>
-            <Link to='/addNewItem' style={{ marginRight: 50 }}>Add New Item to My Closet</Link>
+            <Link to='/addNewItem' style={{ marginRight: 50 }}>Add New Item</Link>
           </div>
           <ul style={{ listStyleType: 'none'}}>
             {
@@ -240,7 +240,7 @@ class Products extends Component {
                         familyProducts.map(product => {
                           return (
                             <li key={ product.id } style={{ margin: '10px 25px'}}>
-                              <div style={{ textAlign: 'center' }}>
+                              <div style={{ textAlign: 'center', cursor: 'pointer' }}>
                                 <img 
                                   src={ `data:image/png;base64,${ product.image }` } 
                                   alt={ product.name } 

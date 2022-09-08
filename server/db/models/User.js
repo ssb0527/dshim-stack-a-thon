@@ -76,7 +76,10 @@ User.prototype.getLooks = async function() {
   let looks = await Look.findAll({
     where: {
       userId: this.id
-    }
+    },
+    order: [
+      ['id', 'ASC']
+    ]
   })
   return looks;
 }

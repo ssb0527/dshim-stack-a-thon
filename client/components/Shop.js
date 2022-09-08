@@ -5,21 +5,42 @@ import {connect} from 'react-redux'
  * COMPONENT
  */
 const Shop = ({ brands }) => {
+  const directory = brands.reduce((acc, brand) => {
+    const firstLetter = brand.name[0].toUpperCase();
+    return {
+      ...acc,
+      [firstLetter]: [...(acc[firstLetter] || []), brand]
+    }
+  }, {})
+  const alphabets = Object.keys(directory)
+
   return (
     <div className='container'>
-      <h3>Shop</h3>
-      <ul style={{ display: 'flex', flexWrap: 'wrap', listStyleType: 'none' }}>
+      <h2>Shop</h2>
+      <ul>
         {
-            brands.map(brand => {
-                const { id, image, link, name } = brand
-                return (
-                    <li key={ id } style={{ margin: '10px 25px'}}>
-                        <a href={ link } target='_blank'>
-                            <img src={ `data:image/png;base64,${image}` } alt={ name } style={{ height: 175, width: 175, borderRadius: 20 }} />
-                        </a>
-                    </li>
-                )
-            })
+          alphabets.map(alphabet => {
+            const brands = directory[alphabet]
+            return (
+              <div key={ alphabet }>
+                  <p>{ alphabet }</p>
+                  <ul style={{ display: 'flex', flexWrap: 'wrap', listStyleType: 'none' }}>
+                    {
+                        brands.map(brand => {
+                            const { id, image, link, name } = brand
+                            return (
+                                <li key={ id } style={{ margin: '10px 25px'}}>
+                                    <a href={ link } target='_blank'>
+                                        <img src={ `data:image/png;base64,${image}` } alt={ name } style={{ height: 150, width: 150, borderRadius: 10 }} />
+                                    </a>
+                                </li>
+                            )
+                        })
+                    }
+                  </ul>
+              </div>
+            )
+          })
         }
       </ul>
     </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {connect} from 'react-redux'
 import CurrentWeather from './CurrentWeather'
-import Search from './Search'
+import CitySearch from './CitySearch'
 import { WEATHER_API_URL, WEATHER_API_KEY } from '../api'
 import Forecast from './Forecast'
 
@@ -28,10 +28,10 @@ const Weather = () => {
             })
             .catch((err) => console.log(err));
     }
-    console.log(forecast)
     return (
         <div className='container'>
-            <Search onSearchChange={ handleOnSearchChange }/>
+            <h2>Weather</h2>
+            <CitySearch onSearchChange={ handleOnSearchChange }/>
             { currentWeather && <CurrentWeather data={ currentWeather } />}
             { forecast && <Forecast data={ forecast }/> }
         </div>

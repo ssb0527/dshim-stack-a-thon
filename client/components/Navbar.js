@@ -1,9 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn}) => { 
+  const location = useLocation();
+
+  return ( 
   <div className='header-top bg-grey justify-content-center'>
     <div className='container'>
       <div className='row align-items-center'>
@@ -16,16 +19,16 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                     <Link to="/home">Home</Link>
                   </li> */}
                   <li className='nav-item'>
-                    <Link to="/mycloset">My Closet</Link>
+                    <Link to="/mycloset" style={ location.pathname === '/mycloset' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>My Closet</Link>
                   </li>
                   <li className='nav-item'>
-                    <Link to="/looks">Saved Looks</Link>
+                    <Link to="/looks" style={ location.pathname === '/looks' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Saved Looks</Link>
                   </li>
                   <li className='nav-item'>
-                    <Link to="/shop">Shop</Link>
+                    <Link to="/shop" style={ location.pathname === '/shop' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Shop</Link>
                   </li>
                   <li className='nav-item'>
-                    <Link to="/weather">Weather</Link>
+                    <Link to="/weather" style={ location.pathname === '/weather' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Weather</Link>
                   </li>
                   <li className='nav-item'>
                     <a href="#" onClick={handleClick}>
@@ -37,11 +40,11 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             ) : (
               <div className='collapse navbar-collapse' id='navbar-collapse' style={{flexGrow: 0}}>
                 <ul id='menu' className='menu navbar-nav mx-auto'>
-                  <li className='nav-item'>
-                    <Link to="/login">Login</Link>
+                <li className='nav-item'>
+                    <Link to="/login" style={ location.pathname === '/login' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Login</Link>
                   </li>
                   <li className='nav-item'>
-                    <Link to="/signup">Sign Up</Link>
+                    <Link to="/signup" style={ location.pathname === '/signup' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Sign Up</Link>
                   </li>
                 </ul>
               </div>
@@ -68,6 +71,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <hr />
   </div>
 )
+}
 
 /**
  * CONTAINER

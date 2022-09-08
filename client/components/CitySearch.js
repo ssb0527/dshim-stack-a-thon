@@ -6,12 +6,12 @@ import { GEO_API_URL, geoApiOptions } from '../api'
 /**
  * COMPONENT
  */
-const Search = ({ onSearchChange }) => {
+const CitySearch = ({ onSearchChange }) => {
     const [ search, setSearch ] = useState(null);
 
     const loadOptions = inputValue => {
         return fetch(
-            `${ GEO_API_URL }/cities?minPopulation=1000000&namePrefix=${ inputValue }`,
+            `${ GEO_API_URL }/cities?minPopulation=100000&namePrefix=${ inputValue }`,
             geoApiOptions
         )
         .then(response => response.json())
@@ -44,4 +44,4 @@ const Search = ({ onSearchChange }) => {
     )
 }
 
-export default connect()(Search)
+export default connect()(CitySearch)

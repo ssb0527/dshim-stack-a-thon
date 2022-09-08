@@ -506,13 +506,14 @@ async function seed() {
       userId: david.id
     }),
     Look.create({ 
-      outerwearImage: await readFile('./public/images/products/acne studios black nate leather jacket.png'), 
-      topImage: await readFile('./public/images/products/alexander wang black tshirt.png'), 
-      bottomImage: await readFile('./public/images/products/saint laurent blue distressed skinny jeans.png'), 
-      shoeImage: await readFile('./public/images/products/saint laurent beige jodphur boots.png'),
-      sockImage: await readFile('./public/images/products/uniqlo black long socks.png'),
-      date: '2022-05-20',
-      note: 'Concert night', 
+      hatImage: await readFile('./public/images/products/margiela navy beanie.png'), 
+      outerwearImage: await readFile('./public/images/products/alpha industries green bomber jacket.png'), 
+      topImage: await readFile('./public/images/products/alexander wang white tshirt.png'), 
+      bottomImage: await readFile('./public/images/products/our legacy blue digital denim jeans.png'), 
+      shoeImage: await readFile('./public/images/products/bottega veneta lug chelsea boots.png'),
+      sockImage: await readFile('./public/images/products/uniqlo white long socks.png'),
+      date: '2022-05-03',
+      note: 'Walking in Central Park', 
       userId: david.id
     }),
     Look.create({ 
@@ -522,8 +523,18 @@ async function seed() {
       shoeImage: await readFile('./public/images/products/thom browne black derby.png'),
       sockImage: await readFile('./public/images/products/uniqlo black long socks.png'),
       bagImage: await readFile('./public/images/products/thom browne black business bag.png'),
-      date: '2022-06-07',
+      date: '2022-05-20',
       note: 'Interview day', 
+      userId: david.id
+    }),
+    Look.create({ 
+      outerwearImage: await readFile('./public/images/products/acne studios black nate leather jacket.png'), 
+      topImage: await readFile('./public/images/products/alexander wang black tshirt.png'), 
+      bottomImage: await readFile('./public/images/products/saint laurent blue distressed skinny jeans.png'), 
+      shoeImage: await readFile('./public/images/products/saint laurent beige jodphur boots.png'),
+      sockImage: await readFile('./public/images/products/uniqlo black long socks.png'),
+      date: '2022-06-07',
+      note: 'Concert night', 
       userId: david.id
     }),
     Look.create({ 
@@ -556,7 +567,7 @@ async function seed() {
       date: '2022-08-11',
       note: 'Bike ride with Ann', 
       userId: david.id
-    }),
+    })
   ])  
 
   // console.log(`seeded ${users.length} users`)
