@@ -31,9 +31,13 @@ const Weather = () => {
     return (
         <div className='container'>
             <h2>Weather</h2>
-            <CitySearch onSearchChange={ handleOnSearchChange }/>
-            { currentWeather && <CurrentWeather data={ currentWeather } />}
-            { forecast && <Forecast data={ forecast }/> }
+            <div style={{ width: '70%', margin: '0 auto' }}>
+                <CitySearch onSearchChange={ handleOnSearchChange }/>
+            </div>
+            <div style={{ width: '80%', margin: '0 auto' }}>
+                { currentWeather && <CurrentWeather data={ currentWeather } />}
+                { forecast && <Forecast data={ forecast }/> }
+            </div>
         </div>
     )
 }

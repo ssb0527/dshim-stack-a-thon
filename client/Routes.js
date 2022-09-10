@@ -26,7 +26,7 @@ class Routes extends Component {
   render() {
     const {isLoggedIn} = this.props
     return (
-      <div>
+      <div style={{ marginTop: 70 }}>
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={ Home } />
@@ -70,7 +70,6 @@ const mapDispatch = dispatch => {
     },
     fetchData() {
       dispatch(fetchBrands()),
-      dispatch(fetchCloset()),
       dispatch(fetchCatTemps()),
       dispatch(fetchLooks()),
       dispatch(fetchCategories()),

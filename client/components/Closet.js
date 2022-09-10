@@ -226,14 +226,14 @@ class Products extends Component {
         <div className='closet'>
           <div className='closetHeader'>
             <h2>My Closet</h2>
-            <Link to='/addNewItem' style={{ marginRight: 50 }}>Add New Item</Link>
+            <Link to='/addNewItem' className='btn btn-primary btn-sm solid blank' style={{ marginRight: 50 }}>Add New Item</Link>
           </div>
           <ul style={{ listStyleType: 'none'}}>
             {
               familyEntries.map(family => {
                 const familyProducts = filtered.filter(product => product.category.familyId === family.id);
                 return (
-                  <li key={ family.id } style={{ margin: '10px 25px'}}>
+                  <li key={ family.id } style={{ margin: '10px 25px' }}>
                     <h3>{ family.name }</h3>
                     <ul className='closetList' style={{ listStyleType: 'none'}}>
                       {
@@ -249,7 +249,7 @@ class Products extends Component {
                                 />
                               </div>
                               <div style={{ textAlign: 'center', fontSize: '0.9rem' }}>
-                                <Link to={`/itemdetail/${product.id}`} style={{ color: 'black' }}>Details</Link>
+                                <Link to={`/itemdetail/${product.id}`} id='details'>Details</Link>
                               </div>
                             </li>
                           )
@@ -289,8 +289,12 @@ class Products extends Component {
             <p>Note</p>
             <textarea placeholder='Special occasion?' value={ note } onChange={ ev => this.setState({ note: ev.target.value })}/>
             <br/>
-            <div style={{ textAlign: 'center' }}>
-              <button disabled={ !date }>Save Look</button>
+            <div>
+              <button 
+                className='btn btn-primary btn-sm solid blank' 
+                id='savelook-button'
+                disabled={ !date }
+              >Save</button>
             </div>
           </form>
         </div>

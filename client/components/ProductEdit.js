@@ -26,6 +26,14 @@ class ProductEdit extends Component {
             categoryId: this.props.product.categoryId,
             colorId: this.props.product.colorId
         })
+        this.el.addEventListener('change', ev => {
+            const file = ev.target.files[0];
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                this.setState({ image: reader.result.slice(22) });
+            })
+            reader.readAsDataURL(file);
+        })
     }
     save(ev) {
         ev.preventDefault();
@@ -44,52 +52,67 @@ class ProductEdit extends Component {
         const { brands, categories, colors, product, deleteItem } = this.props;
         const { save } = this;
         return (
-            <div>
-            <Link to='/mycloset'>Return to Closet</Link>
-            <h3>Item Detail</h3>
-            <form onSubmit={ save }>
-                <p>Item Image</p>
-                <img src={ image && `data:image/png;base64,${ image }` } style={{ height: 300}} />
-                <br />
-                <p>Item Name</p>
-                <input value={ name } onChange={ ev => this.setState({ name: ev.target.value })} />
-                <p>Brand</p>
-                <select value={ brandId } onChange={ ev => this.setState({ brandId: ev.target.value })}>
-                    <option value=''>-- Select Brand --</option>
-                        {
-                            brands.map( brand => {
-                                return (
-                                    <option key={ brand.id } value={ brand.id }>{ brand.name }</option>
-                                )
-                            })
-                        }
-                </select>
-                <p>Category</p>
-                <select value={ categoryId } onChange={ ev => this.setState({ categoryId: ev.target.value })}>
-                    <option value=''>-- Select Category --</option>
-                        {
-                            categories.map( category => {
-                                return (
-                                    <option key={ category.id } value={ category.id }>{ category.name }</option>
-                                )
-                            })
-                        }
-                </select>
-                <p>Color</p>
-                <select value={ colorId } onChange={ ev => this.setState({ colorId: ev.target.value })}>
-                    <option value=''>-- Select Category --</option>
-                        {
-                            colors.map( color => {
-                                return (
-                                    <option key={ color.id } value={ color.id }>{ color.name }</option>
-                                )
-                            })
-                        }
-                </select>
-                <br />
-                <button disabled={ !image || !name || !brandId || !categoryId || !colorId }>Edit</button>
-            </form>
-            <button onClick={() => deleteItem(product)}>Delete</button>
+            <div className='container'>
+                <Link style ={{ marginLeft: 100 }} to='/mycloset'>Return to Closet</Link>
+                <div className='container' style={{ width: '60%'}}>
+                <div className='closetHeader'>
+                    <h3>Item Details</h3>
+                </div>
+                <div className='d-flex justify-content-center'>
+                    <div style={{ width: '70%' }}>
+                        <form onSubmit={ save }>
+                            <p>Item Image</p>
+                            <img src={ image && `data:image/png;base64,${ image }` } style={{ height: 300, display: 'block', margin: '10px auto 25px' }} />
+                            <input type='file' ref={ el => this.el = el } style={{ display: 'block', margin: '0 auto' }}/>
+                            <p className='mt-2'>Item Name</p>
+                            <input value={ name } onChange={ ev => this.setState({ name: ev.target.value })} style={{ width: '80%', display: 'block', margin: '0 auto' }} />
+                            <p className='mt-2'>Brand</p>
+                            <select value={ brandId } onChange={ ev => this.setState({ brandId: ev.target.value })}>
+                                <option value=''>-- Select Brand --</option>
+                                    {
+                                        brands.map( brand => {
+                                            return (
+                                                <option key={ brand.id } value={ brand.id }>{ brand.name }</option>
+                                            )
+                                        })
+                                    }
+                            </select>
+                            <p className='mt-2'>Category</p>
+                            <select value={ categoryId } onChange={ ev => this.setState({ categoryId: ev.target.value })}>
+                                <option value=''>-- Select Category --</option>
+                                    {
+                                        categories.map( category => {
+                                            return (
+                                                <option key={ category.id } value={ category.id }>{ category.name }</option>
+                                            )
+                                        })
+                                    }
+                            </select>
+                            <p className='mt-2'>Color</p>
+                            <select value={ colorId } onChange={ ev => this.setState({ colorId: ev.target.value })}>
+                                <option value=''>-- Select Category --</option>
+                                    {
+                                        colors.map( color => {
+                                            return (
+                                                <option key={ color.id } value={ color.id }>{ color.name }</option>
+                                            )
+                                        })
+                                    }
+                            </select>
+                            <button 
+                                disabled={ !image || !name || !brandId || !categoryId || !colorId }
+                                className='btn btn-primary btn-sm solid blank mt-4'
+                                style={{ display: 'block', margin: '0 auto'}}
+                                >Edit</button>
+                        </form>
+                        <button 
+                            className='btn btn-primary btn-sm solid blank mt-4' 
+                            onClick={() => deleteItem(product)}
+                            style={{ display: 'block', margin: '0 auto'}}
+                        >Delete</button>
+                    </div>
+                </div>
+            </div>
             </div>
         )
     }

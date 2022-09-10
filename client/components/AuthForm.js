@@ -9,25 +9,38 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
+    <div className='container'>
+      <div className='container' style={{ width: '40%', marginTop: '100px'}}>
+        <h3>{ displayName }</h3>
+          <div className='d-flex justify-content-center' >
+            <div style={{ width: '70%' }}>
+            <form onSubmit={handleSubmit} name={name}>
+              <div className='mt-4'>
+                <label htmlFor="username">
+                  <p>Username</p>
+                </label>
+                <br />
+                <input name="username" type="text" style={{ width: '80%', display: 'block', margin: '10px auto' }} />
+              </div>
+              <div className='mt-4'>
+                <label htmlFor="password">
+                  <p>Password</p>
+                </label>
+                <br />
+                <input name="password" type="password" style={{ width: '80%', display: 'block', margin: '10px auto' }} />
+              </div>
+              <div className='mt-5'>
+                <button 
+                  type="submit" 
+                  className='btn btn-primary btn-md solid blank mt-4'
+                  style={{ display: 'block', margin: '0 auto', fontSize: '1rem' }}
+                >{displayName}</button>
+              </div>
+              {error && error.response && <div> {error.response.data} </div>}
+            </form>
+            </div>
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
+      </div>
     </div>
   )
 }

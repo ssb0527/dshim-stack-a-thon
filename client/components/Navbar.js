@@ -15,23 +15,20 @@ const Navbar = ({handleClick, isLoggedIn}) => {
             {isLoggedIn ? (
               <div className='collapse navbar-collapse' id='navbar-collapse' style={{ flexGrow: 0 }}>
                 <ul id='menu' className='menu navbar-nav mx-auto' style={{ textAlign: 'left'}}>
-                  {/* <li className='nav-item'>
-                    <Link to="/home">Home</Link>
-                  </li> */}
                   <li className='nav-item'>
-                    <Link to="/mycloset" style={ location.pathname === '/mycloset' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>My Closet</Link>
+                    <Link to="/mycloset" id='nav' style={ location.pathname === '/mycloset' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>My Closet</Link>
                   </li>
                   <li className='nav-item'>
-                    <Link to="/looks" style={ location.pathname === '/looks' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Saved Looks</Link>
+                    <Link to="/looks" id='nav' style={ location.pathname === '/looks' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Saved Outfits</Link>
                   </li>
                   <li className='nav-item'>
-                    <Link to="/shop" style={ location.pathname === '/shop' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Shop</Link>
+                    <Link to="/shop" id='nav' style={ location.pathname === '/shop' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Shop</Link>
                   </li>
                   <li className='nav-item'>
-                    <Link to="/weather" style={ location.pathname === '/weather' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Weather</Link>
+                    <Link to="/weather" id='nav' style={ location.pathname === '/weather' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Weather</Link>
                   </li>
                   <li className='nav-item'>
-                    <a href="#" onClick={handleClick}>
+                    <a href="#" id='nav' onClick={handleClick}>
                       Logout
                     </a>
                   </li>
@@ -41,10 +38,10 @@ const Navbar = ({handleClick, isLoggedIn}) => {
               <div className='collapse navbar-collapse' id='navbar-collapse' style={{flexGrow: 0}}>
                 <ul id='menu' className='menu navbar-nav mx-auto'>
                 <li className='nav-item'>
-                    <Link to="/login" style={ location.pathname === '/login' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Login</Link>
+                    <Link to="/login" id='nav' style={ location.pathname === '/login' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Login</Link>
                   </li>
                   <li className='nav-item'>
-                    <Link to="/signup" style={ location.pathname === '/signup' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Sign Up</Link>
+                    <Link to="/signup" id='nav' style={ location.pathname === '/signup' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Sign Up</Link>
                   </li>
                 </ul>
               </div>
@@ -68,7 +65,6 @@ const Navbar = ({handleClick, isLoggedIn}) => {
         </div>
       </div>
     </div>
-    <hr />
   </div>
 )
 }

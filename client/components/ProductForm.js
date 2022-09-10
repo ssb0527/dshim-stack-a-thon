@@ -44,52 +44,62 @@ class ProductForm extends Component {
         const { brands, categories, colors } = this.props;
         const { save } = this;
         return (
-            <div>
-            <Link to='/mycloset'>Return to Closet</Link>
-            <h3>Add New Item to My Closet</h3>
-            <form onSubmit={ save }>
-                <p>Item Image</p>
-                <img src={ image && `data:image/png;base64,${ image }` } style={{ height: 300 }} />
-                <br />
-                <input type='file' ref={ el => this.el = el }/><br />
-                <p>Item Name</p>
-                <input value={ name } onChange={ ev => this.setState({ name: ev.target.value })} />
-                <p>Brand</p>
-                <select value={ brandId } onChange={ ev => this.setState({ brandId: ev.target.value })}>
-                    <option value=''>-- Select Brand --</option>
-                        {
-                            brands.map( brand => {
-                                return (
-                                    <option key={ brand.id } value={ brand.id }>{ brand.name }</option>
-                                )
-                            })
-                        }
-                </select>
-                <p>Category</p>
-                <select value={ categoryId } onChange={ ev => this.setState({ categoryId: ev.target.value })}>
-                    <option value=''>-- Select Category --</option>
-                        {
-                            categories.map( category => {
-                                return (
-                                    <option key={ category.id } value={ category.id }>{ category.name }</option>
-                                )
-                            })
-                        }
-                </select>
-                <p>Color</p>
-                <select value={ colorId } onChange={ ev => this.setState({ colorId: ev.target.value })}>
-                    <option value=''>-- Select Category --</option>
-                        {
-                            colors.map( color => {
-                                return (
-                                    <option key={ color.id } value={ color.id }>{ color.name }</option>
-                                )
-                            })
-                        }
-                </select>
-                <br />
-                <button disabled={ !image || !name || !brandId || !categoryId || !colorId }>Add</button>
-            </form>
+            <div className='container'>
+                <Link style ={{ marginLeft: 100 }} to='/mycloset'>Return to Closet</Link>
+                <div className='container' style={{ width: '60%'}}>
+                    <div className='closetHeader'>
+                        <h3>Add New Item</h3>
+                    </div>
+                    <div className='d-flex justify-content-center'>
+                        <div style={{ width: '70%' }}>
+                            <form onSubmit={ save }>
+                                <p>Item Image</p>
+                                <img src={ image && `data:image/png;base64,${ image }` } style={{ height: 300, display: 'block', margin: '0 auto' }} />
+                                <input type='file' ref={ el => this.el = el } style={{ display: 'block', margin: '0 auto' }}/>
+                                <p className='mt-2'>Item Name</p>
+                                <input value={ name } onChange={ ev => this.setState({ name: ev.target.value })} style={{ width: '80%', display: 'block', margin: '0 auto' }} />
+                                <p className='mt-2'>Brand</p>
+                                <select value={ brandId } onChange={ ev => this.setState({ brandId: ev.target.value })}>
+                                    <option value=''>-- Select Brand --</option>
+                                        {
+                                            brands.map( brand => {
+                                                return (
+                                                    <option key={ brand.id } value={ brand.id }>{ brand.name }</option>
+                                                )
+                                            })
+                                        }
+                                </select>
+                                <p className='mt-2'>Category</p>
+                                <select value={ categoryId } onChange={ ev => this.setState({ categoryId: ev.target.value })}>
+                                    <option value=''>-- Select Category --</option>
+                                        {
+                                            categories.map( category => {
+                                                return (
+                                                    <option key={ category.id } value={ category.id }>{ category.name }</option>
+                                                )
+                                            })
+                                        }
+                                </select>
+                                <p className='mt-2'>Color</p>
+                                <select value={ colorId } onChange={ ev => this.setState({ colorId: ev.target.value })}>
+                                    <option value=''>-- Select Category --</option>
+                                        {
+                                            colors.map( color => {
+                                                return (
+                                                    <option key={ color.id } value={ color.id }>{ color.name }</option>
+                                                )
+                                            })
+                                        }
+                                </select>
+                                <button 
+                                    disabled={ !image || !name || !brandId || !categoryId || !colorId }
+                                    className='btn btn-primary btn-sm solid blank mt-4'
+                                    style={{ display: 'block', margin: '0 auto'}}
+                                    >Add</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

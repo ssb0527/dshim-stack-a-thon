@@ -29,8 +29,10 @@ class Shop extends Component {
     return (
       <div className='container'>
         <h2>Shop</h2>
-        <input className='brand-search' placeholder='Search for Brand' onChange={ ev => this.setState({ term: ev.target.value })} />
-        <ul>
+        <div style={{ width: '70%', margin: '0 auto' }}>
+          <input style={{ fontSize: '16px'}} className='brand-search' placeholder='Search for Brand' onChange={ ev => this.setState({ term: ev.target.value })} />
+        </div>
+        <ul className='brand-list'>
           {
             alphabets.map(alphabet => {
               const brands = directory[alphabet]
