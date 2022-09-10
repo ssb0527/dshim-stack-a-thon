@@ -38,6 +38,12 @@ li.selected {
   text-decoration: underline;
 }
 
+.home-page-image {
+  display: block;
+  margin: 0 auto;
+  width: 70%;
+}
+
 .myCloset {
   display: flex;
 }
