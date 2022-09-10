@@ -31,7 +31,7 @@ const Weather = () => {
     return (
         <div className='container'>
             <h2>Weather</h2>
-            <div style={{ width: '70%', margin: '0 auto' }}>
+            <div style={{ width: '75%', margin: '0 auto' }}>
                 <CitySearch onSearchChange={ handleOnSearchChange }/>
             </div>
             <div style={{ width: '80%', margin: '0 auto' }}>

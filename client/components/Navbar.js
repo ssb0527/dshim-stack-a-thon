@@ -22,10 +22,10 @@ const Navbar = ({handleClick, isLoggedIn}) => {
                     <Link to="/looks" id='nav' style={ location.pathname === '/looks' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Saved Outfits</Link>
                   </li>
                   <li className='nav-item'>
-                    <Link to="/shop" id='nav' style={ location.pathname === '/shop' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Shop</Link>
+                    <Link to="/weather" id='nav' style={ location.pathname === '/weather' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Weather</Link>
                   </li>
                   <li className='nav-item'>
-                    <Link to="/weather" id='nav' style={ location.pathname === '/weather' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Weather</Link>
+                    <Link to="/shop" id='nav' style={ location.pathname === '/shop' ? { fontWeight: 'bold', textDecoration: 'underline' } : {} }>Shop</Link>
                   </li>
                   <li className='nav-item'>
                     <a href="#" id='nav' onClick={handleClick}>

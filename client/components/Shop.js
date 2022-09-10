@@ -29,7 +29,7 @@ class Shop extends Component {
     return (
       <div className='container'>
         <h2>Shop</h2>
-        <div style={{ width: '70%', margin: '0 auto' }}>
+        <div style={{ width: '75%', margin: '0 auto' }}>
           <input style={{ fontSize: '16px'}} className='brand-search' placeholder='Search for Brand' onChange={ ev => this.setState({ term: ev.target.value })} />
         </div>
         <ul className='brand-list'>

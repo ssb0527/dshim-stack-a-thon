@@ -10,7 +10,7 @@ const AuthForm = props => {
 
   return (
     <div className='container'>
-      <div className='container' style={{ width: '40%', marginTop: '100px'}}>
+      <div className='container' style={{ width: '40%', marginTop: 130 }}>
         <h3>{ displayName }</h3>
           <div className='d-flex justify-content-center' >
             <div style={{ width: '70%' }}>
